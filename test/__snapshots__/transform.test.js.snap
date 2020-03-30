@@ -1,0 +1,215 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`inserts empty text block if no children are given 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "",
+    },
+  ],
+  "type": "heading-one",
+}
+`;
+
+exports[`transforms complex mdast tree derived from ./example.md 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "text": "Heading one",
+      },
+    ],
+    "type": "heading-one",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "text": "Slate POC",
+      },
+    ],
+    "type": "heading-two",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "text": "Slate is interesting, hopefully it'll work better than react-rte so we can have a better text editor. Some of the ",
+      },
+      Object {
+        "italic": true,
+        "text": "benefits",
+      },
+      Object {
+        "text": " of slate are:",
+      },
+    ],
+    "type": "paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Total control over how everything works",
+              },
+            ],
+            "type": "paragraph",
+          },
+        ],
+        "type": "list-item",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Near AST level API where you can control the editor / content",
+              },
+            ],
+            "type": "paragraph",
+          },
+        ],
+        "type": "list-item",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "bold": true,
+                "text": "Actively",
+              },
+              Object {
+                "text": " maintained",
+              },
+            ],
+            "type": "paragraph",
+          },
+        ],
+        "type": "list-item",
+      },
+    ],
+    "type": "numbered-list",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Apple",
+              },
+            ],
+            "type": "paragraph",
+          },
+        ],
+        "type": "list-item",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Kiwi",
+              },
+            ],
+            "type": "paragraph",
+          },
+        ],
+        "type": "list-item",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Strawberry",
+              },
+            ],
+            "type": "paragraph",
+          },
+        ],
+        "type": "list-item",
+      },
+    ],
+    "type": "bulleted-list",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "text": "Check out ",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "text": "my website",
+          },
+        ],
+        "link": "https://jackhanford.com",
+        "type": "link",
+      },
+    ],
+    "type": "paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "text": "Always bet on javascript",
+          },
+        ],
+        "type": "paragraph",
+      },
+    ],
+    "type": "block-quote",
+  },
+]
+`;
+
+exports[`transforms heading depth one to slate state object with {type: "heading-one", children: [{text: "hey"}]} 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "hey",
+    },
+  ],
+  "type": "heading-one",
+}
+`;
+
+exports[`transforms heading depth three to slate state object with {type: "heading-three", children: [{text: "heading three"}]} 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "heading three",
+    },
+  ],
+  "type": "heading-three",
+}
+`;
+
+exports[`transforms heading depth two to slate state object with {type: "heading-two", children: [{text: "heading two"}]} 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "heading two",
+    },
+  ],
+  "type": "heading-two",
+}
+`;
+
+exports[`transforms link 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "Personal website",
+    },
+  ],
+  "link": "https://jackhanford.com",
+  "type": "link",
+}
+`;

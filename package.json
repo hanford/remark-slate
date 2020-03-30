@@ -1,0 +1,43 @@
+{
+  "name": "remark-slate",
+  "version": "0.1.0",
+  "description": "remark plugin to compile Markdown to a slate compatible object",
+  "license": "MIT",
+  "main": "./index.js",
+  "keywords": [
+    "remark",
+    "remark-plugin",
+    "plugin",
+    "mdast",
+    "markdown",
+    "slate",
+    "RTE",
+    "text editor"
+  ],
+  "repository": "hanford/remark-slate",
+  "bugs": "https://github.com/hanford/remark-slate/issues",
+  "author": "Jack Hanford <jackhanford@gmail.com> (https://jackhanford.com)",
+  "contributors": [
+    "Jack Hanford <jackhanford@gmail.com> (https://jackhanford.com)"
+  ],
+  "files": [
+    "./index.js"
+  ],
+  "dependencies": {
+    "xtend": "^4.0.2"
+  },
+  "devDependencies": {
+    "jest": "^25.2.4",
+    "prettier": "^2.0.0",
+    "remark": "^11.0.0"
+  },
+  "scripts": {
+    "jest": "jest",
+    "test": "jest"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": true
+  }
+}
