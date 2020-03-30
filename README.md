@@ -3,9 +3,9 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-[**remark**][remark] plugin to serialize Markdown as a (Slate)[https://www.slatejs.org/] 0.50+ compatible object.
+[**remark**][remark] plugin to serialize Markdown as a [Slate](https://www.slatejs.org/) 0.50+ compatible object.
 
-This package is meant to be used with (remark-parse)[https://github.com/remarkjs/remark/tree/master/packages/remark-parse]
+This package is meant to be used with [remark-parse](https://github.com/remarkjs/remark/tree/master/packages/remark-parse)
 
 ## Usage
 
@@ -64,22 +64,178 @@ Would result in the following:
 
 ```json
 [
-  {"type":"heading-one","children":[{"text":"Heading one"}]},
-  {"type":"heading-two","children":[{"text":"Heading two"}]},
-  {"type":"heading-three","children":[{"text":"Heading three"}]},
-  {"type":"heading-four","children":[{"text":"Heading four"}]},
-  {"type":"heading-five","children":[{"text":"Heading five"}]},
-  {"type":"heading-six","children":[{"text":"Heading six"}]},
-  {"type":"paragraph","children":[{"text":"Normal paragraph"}]},
-  {"type":"paragraph","children":[{"text":"italic text","italic":true}]},
-  {"type":"paragraph","children":[{"text":"bold text","bold":true}]},
-  {"type":"paragraph","children":[{"text":"strike through text","strikeThrough":true}]},
-  {"type":"paragraph","children":[{"type":"link","link":"https://jackhanford.com","children":[{"text":"hyperlink"}]}]},
-  {"type":"block-quote","children":[{"type":"paragraph","children":[{"text":"A block quote."}]}]},
-  {"type":"bulleted-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"text":"bullet list item 1"}]}]},
-  {"type":"list-item","children":[{"type":"paragraph","children":[{"text":"bullet list item 2"}]}]}]},
-  {"type":"numbered-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"text":"ordered list item 1"}]}]},
-  {"type":"list-item","children":[{"type":"paragraph","children":[{"text":"ordered list item 2"}]}]}
+  {
+    "type": "heading-one",
+    "children": [
+      {
+        "text": "Heading one"
+      }
+    ]
+  },
+  {
+    "type": "heading-two",
+    "children": [
+      {
+        "text": "Heading two"
+      }
+    ]
+  },
+  {
+    "type": "heading-three",
+    "children": [
+      {
+        "text": "Heading three"
+      }
+    ]
+  },
+  {
+    "type": "heading-four",
+    "children": [
+      {
+        "text": "Heading four"
+      }
+    ]
+  },
+  {
+    "type": "heading-five",
+    "children": [
+      {
+        "text": "Heading five"
+      }
+    ]
+  },
+  {
+    "type": "heading-six",
+    "children": [
+      {
+        "text": "Heading six"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Normal paragraph"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "italic text",
+        "italic": true
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "bold text",
+        "italic": true
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "strike through text",
+        "strikeThrough": true
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "type": "link",
+        "link": "https://jackhanford.com",
+        "children": [
+          {
+            "text": "hyperkink"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "block-quote",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": "A block quote."
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "bulleted-list",
+    "children": [
+      {
+        "type": "list-item",
+        "children": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "bullet list item 1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "children": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "bullet list item 2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "numbered-list",
+    "children": [
+      {
+        "type": "list-item",
+        "children": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "ordered list item 1"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "list-item",
+        "children": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "ordered list item 2"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
 ]
 ```
 
