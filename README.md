@@ -80,7 +80,7 @@ Would result in the following:
   {"type":"list-item","children":[{"type":"paragraph","children":[{"text":"bullet list item 2"}]}]}]},
   {"type":"numbered-list","children":[{"type":"list-item","children":[{"type":"paragraph","children":[{"text":"ordered list item 1"}]}]},
   {"type":"list-item","children":[{"type":"paragraph","children":[{"text":"ordered list item 2"}]}]}
-  ]
+]
 ```
 
 ```js
