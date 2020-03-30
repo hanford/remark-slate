@@ -3,7 +3,7 @@
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
-[**remark**][remark] plugin to serialize Markdown as a [Slate](https://www.slatejs.org/) 0.50+ compatible object.
+[**remark**][remark] plugin to compile Markdown as a [Slate](https://www.slatejs.org/) 0.50+ compatible object.
 
 This package is meant to be used with [remark-parse](https://github.com/remarkjs/remark/tree/master/packages/remark-parse)
 
