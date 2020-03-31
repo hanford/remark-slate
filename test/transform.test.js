@@ -1,5 +1,7 @@
-const transform = require('../transform');
+const plugin = require('../');
 const complexMdast = require('./complex-mdast');
+
+const transform = plugin.transform;
 
 it('transforms heading depth one to slate state object with {type: "heading-one", children: [{text: "hey"}]}', () => {
   expect(

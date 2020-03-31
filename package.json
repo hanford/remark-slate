@@ -1,6 +1,6 @@
 {
   "name": "remark-slate",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "remark plugin to compile Markdown to a slate compatible object",
   "license": "MIT",
   "main": "index.js",
