@@ -56,7 +56,7 @@ unified()
   .use(slate)
   .process(fs.readFileSync('example.md'), (err, file) => {
     if (err) throw err;
-    console.log(String(file));
+    console.log({ file });
   });
 ```
 
