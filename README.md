@@ -28,7 +28,7 @@ Normal paragraph
 
 _italic text_
 
-_bold text_
+**bold tex**
 
 ~~strike through text~~
 
