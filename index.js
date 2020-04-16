@@ -19,12 +19,37 @@ function transform(node, opts) {
   var settings = opts || {};
   var flattenListItems = settings.flattenListItems || false;
 
+  var parentNode = node.parentNode || null;
   var children = [{ text: '' }];
+
+  var isList =
+    node.type === 'list' ||
+    node.type === 'numbered-list' ||
+    node.type === 'bulleted-list';
+
+  if (Array.isArray(node.children) && node.children.length > 0 && isList) {
+    children = node.children.map(function (child) {
+      if (child.children.length) {
+        child.children = child.children
+          .map(function (grandChild) {
+            if (grandChild.type === 'list') {
+              node.children.push(grandChild);
+              return;
+            }
+            return grandChild;
+          })
+          .filter(Boolean);
+      }
+
+      return child;
+    });
+  }
 
   if (Array.isArray(node.children) && node.children.length > 0) {
     children = node.children.map(function (c) {
       return transform(
         extend(c, {
+          parentNode: node,
           ordered: node.ordered || false,
         }),
         settings
@@ -55,7 +80,7 @@ function transform(node, opts) {
     case 'delete':
       return extend(forceLeafNode(children), { strikeThrough: true });
     case 'paragraph':
-      if (flattenListItems) {
+      if (flattenListItems && parentNode && parentNode.type === 'listItem') {
         return forceLeafNode(children);
       } else {
         return {

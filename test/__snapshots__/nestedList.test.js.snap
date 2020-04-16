@@ -27,6 +27,37 @@ Array [
             ],
             "type": "paragraph",
           },
+        ],
+        "type": "list-item",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "text": "Nested 1 Bullet 1",
+                  },
+                ],
+                "type": "paragraph",
+              },
+            ],
+            "type": "list-item",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "children": Array [
+                  Object {
+                    "text": "Nested 1 Bullet 2",
+                  },
+                ],
+                "type": "paragraph",
+              },
+            ],
+            "type": "list-item",
+          },
           Object {
             "children": Array [
               Object {
@@ -34,7 +65,7 @@ Array [
                   Object {
                     "children": Array [
                       Object {
-                        "text": "Nested 1 Bullet 1",
+                        "text": "Nested 2 Bullet 1",
                       },
                     ],
                     "type": "paragraph",
@@ -47,41 +78,10 @@ Array [
                   Object {
                     "children": Array [
                       Object {
-                        "text": "Nested 1 Bullet 2",
+                        "text": "Nested 2 Bullet 2",
                       },
                     ],
                     "type": "paragraph",
-                  },
-                  Object {
-                    "children": Array [
-                      Object {
-                        "children": Array [
-                          Object {
-                            "children": Array [
-                              Object {
-                                "text": "Nested 2 Bullet 1",
-                              },
-                            ],
-                            "type": "paragraph",
-                          },
-                        ],
-                        "type": "list-item",
-                      },
-                      Object {
-                        "children": Array [
-                          Object {
-                            "children": Array [
-                              Object {
-                                "text": "Nested 2 Bullet 2",
-                              },
-                            ],
-                            "type": "paragraph",
-                          },
-                        ],
-                        "type": "list-item",
-                      },
-                    ],
-                    "type": "bulleted-list",
                   },
                 ],
                 "type": "list-item",
@@ -90,7 +90,7 @@ Array [
             "type": "bulleted-list",
           },
         ],
-        "type": "list-item",
+        "type": "bulleted-list",
       },
     ],
     "type": "bulleted-list",
@@ -115,50 +115,50 @@ Array [
           Object {
             "text": "Bullet 2",
           },
+        ],
+        "type": "list-item",
+      },
+      Object {
+        "children": Array [
           Object {
             "children": Array [
               Object {
-                "children": Array [
-                  Object {
-                    "text": "Nested 1 Bullet 1",
-                  },
-                ],
-                "type": "list-item",
-              },
-              Object {
-                "children": Array [
-                  Object {
-                    "text": "Nested 1 Bullet 2",
-                  },
-                  Object {
-                    "children": Array [
-                      Object {
-                        "children": Array [
-                          Object {
-                            "text": "Nested 2 Bullet 1",
-                          },
-                        ],
-                        "type": "list-item",
-                      },
-                      Object {
-                        "children": Array [
-                          Object {
-                            "text": "Nested 2 Bullet 2",
-                          },
-                        ],
-                        "type": "list-item",
-                      },
-                    ],
-                    "type": "bulleted-list",
-                  },
-                ],
-                "type": "list-item",
+                "text": "Nested 1 Bullet 1",
               },
             ],
-            "type": "bulleted-list",
+            "type": "list-item",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "text": "Nested 1 Bullet 2",
+              },
+            ],
+            "type": "list-item",
           },
         ],
-        "type": "list-item",
+        "type": "bulleted-list",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Nested 2 Bullet 1",
+              },
+            ],
+            "type": "list-item",
+          },
+          Object {
+            "children": Array [
+              Object {
+                "text": "Nested 2 Bullet 2",
+              },
+            ],
+            "type": "list-item",
+          },
+        ],
+        "type": "bulleted-list",
       },
     ],
     "type": "bulleted-list",
