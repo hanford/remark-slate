@@ -1,21 +1,34 @@
+'use strict';
+
 var extend = require('xtend');
 
 module.exports = plugin;
 
-function plugin() {
+function plugin(opts) {
+  var settings = opts || {};
   this.Compiler = function compiler(node) {
-    return node.children.map(transform);
+    return node.children.map(function (j) {
+      return transform(j, opts);
+    });
   };
 }
 
 module.exports.transform = transform;
 
-function transform(node) {
+function transform(node, opts) {
+  var settings = opts || {};
+  var flattenListItems = settings.flattenListItems || false;
+
   var children = [{ text: '' }];
 
   if (Array.isArray(node.children) && node.children.length > 0) {
     children = node.children.map(function (c) {
-      return transform(extend(c, { ordered: node.ordered || false }));
+      return transform(
+        extend(c, {
+          ordered: node.ordered || false,
+        }),
+        settings
+      );
     });
   }
 
@@ -42,10 +55,14 @@ function transform(node) {
     case 'delete':
       return extend(forceLeafNode(children), { strikeThrough: true });
     case 'paragraph':
-      return {
-        type: node.type,
-        children: children,
-      };
+      if (flattenListItems) {
+        return forceLeafNode(children);
+      } else {
+        return {
+          type: node.type,
+          children: children,
+        };
+      }
     case 'link':
       return {
         type: node.type,
