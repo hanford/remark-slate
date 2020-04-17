@@ -80,7 +80,7 @@ function transform(node, opts) {
     case 'delete':
       return extend(forceLeafNode(children), { strikeThrough: true });
     case 'paragraph':
-      if (flattenListItems && parentNode && parentNode.type === 'listItem') {
+      if (flattenListItems && parentNode && parentNode.type === 'listItem' && children[0].type !== 'link') {
         return forceLeafNode(children);
       } else {
         return {
@@ -109,7 +109,7 @@ function transform(node, opts) {
 }
 
 function forceLeafNode(children) {
-  return { text: children[0].text };
+  return { text: children.map(k => k.text).join('') };
 }
 
 var depthToHeading = {
