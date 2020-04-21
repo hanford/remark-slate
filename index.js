@@ -19,42 +19,6 @@ function transform(node, opts) {
   var parentNode = node.parentNode || null;
   var children = [{ text: '' }];
 
-  var isList =
-    node.type === 'list' || node.type === 'ol_list' || node.type === 'ul_list';
-
-  if (Array.isArray(node.children) && node.children.length > 0 && isList) {
-    let lastFriendlyItem;
-    children = node.children
-      .reduce((acc, child) => {
-        if (child.children.length) {
-          const nonListTypeItem = child.children.every(
-            (f) => f.type !== 'list' && f.type !== 'listItem'
-          );
-
-          if (nonListTypeItem) {
-            lastFriendlyItem = child;
-          }
-
-          child.children = child.children
-            .map(function (grandChild) {
-              if (grandChild.type === 'list') {
-                lastFriendlyItem.children.push(grandChild);
-                return false;
-              }
-              return grandChild;
-            })
-            .filter(Boolean);
-        }
-
-        // if (child.type !== 'paragraph' && child.children.length === 0) {
-        //   return acc;
-        // }
-
-        return [...acc, child];
-      }, [])
-      .filter(Boolean);
-  }
-
   if (Array.isArray(node.children) && node.children.length > 0) {
     children = node.children.map(function (c) {
       return transform(

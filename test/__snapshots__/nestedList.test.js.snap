@@ -14,6 +14,19 @@ Array [
             ],
             "type": "paragraph",
           },
+        ],
+        "type": "list_item",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "children": Array [
+              Object {
+                "text": "Bullet 2",
+              },
+            ],
+            "type": "paragraph",
+          },
           Object {
             "children": Array [
               Object {
@@ -22,6 +35,19 @@ Array [
                     "children": Array [
                       Object {
                         "text": "Nested 1 Bullet 1",
+                      },
+                    ],
+                    "type": "paragraph",
+                  },
+                ],
+                "type": "list_item",
+              },
+              Object {
+                "children": Array [
+                  Object {
+                    "children": Array [
+                      Object {
+                        "text": "Nested 1 Bullet 2",
                       },
                     ],
                     "type": "paragraph",
@@ -60,34 +86,8 @@ Array [
                 ],
                 "type": "list_item",
               },
-              Object {
-                "children": Array [
-                  Object {
-                    "children": Array [
-                      Object {
-                        "text": "Nested 1 Bullet 2",
-                      },
-                    ],
-                    "type": "paragraph",
-                  },
-                ],
-                "type": "list_item",
-              },
             ],
             "type": "ul_list",
-          },
-        ],
-        "type": "list_item",
-      },
-      Object {
-        "children": Array [
-          Object {
-            "children": Array [
-              Object {
-                "text": "Bullet 2",
-              },
-            ],
-            "type": "paragraph",
           },
         ],
         "type": "list_item",
