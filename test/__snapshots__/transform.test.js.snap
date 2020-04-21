@@ -7,7 +7,7 @@ Object {
       "text": "",
     },
   ],
-  "type": "heading-one",
+  "type": "heading_one",
 }
 `;
 
@@ -19,7 +19,7 @@ Array [
         "text": "Heading one",
       },
     ],
-    "type": "heading-one",
+    "type": "heading_one",
   },
   Object {
     "children": Array [
@@ -27,7 +27,7 @@ Array [
         "text": "Slate POC",
       },
     ],
-    "type": "heading-two",
+    "type": "heading_two",
   },
   Object {
     "children": Array [
@@ -57,7 +57,7 @@ Array [
             "type": "paragraph",
           },
         ],
-        "type": "list-item",
+        "type": "list_item",
       },
       Object {
         "children": Array [
@@ -70,7 +70,7 @@ Array [
             "type": "paragraph",
           },
         ],
-        "type": "list-item",
+        "type": "list_item",
       },
       Object {
         "children": Array [
@@ -87,10 +87,10 @@ Array [
             "type": "paragraph",
           },
         ],
-        "type": "list-item",
+        "type": "list_item",
       },
     ],
-    "type": "numbered-list",
+    "type": "ol_list",
   },
   Object {
     "children": Array [
@@ -105,7 +105,7 @@ Array [
             "type": "paragraph",
           },
         ],
-        "type": "list-item",
+        "type": "list_item",
       },
       Object {
         "children": Array [
@@ -118,7 +118,7 @@ Array [
             "type": "paragraph",
           },
         ],
-        "type": "list-item",
+        "type": "list_item",
       },
       Object {
         "children": Array [
@@ -131,10 +131,10 @@ Array [
             "type": "paragraph",
           },
         ],
-        "type": "list-item",
+        "type": "list_item",
       },
     ],
-    "type": "bulleted-list",
+    "type": "ul_list",
   },
   Object {
     "children": Array [
@@ -164,7 +164,7 @@ Array [
         "type": "paragraph",
       },
     ],
-    "type": "block-quote",
+    "type": "block_quote",
   },
 ]
 `;
@@ -176,7 +176,7 @@ Object {
       "text": "hey",
     },
   ],
-  "type": "heading-one",
+  "type": "heading_one",
 }
 `;
 
@@ -187,7 +187,7 @@ Object {
       "text": "heading three",
     },
   ],
-  "type": "heading-three",
+  "type": "heading_three",
 }
 `;
 
@@ -198,7 +198,7 @@ Object {
       "text": "heading two",
     },
   ],
-  "type": "heading-two",
+  "type": "heading_two",
 }
 `;
 

@@ -7,9 +7,7 @@ module.exports = plugin;
 function plugin(opts) {
   var settings = opts || {};
   this.Compiler = function compiler(node) {
-    return node.children.map(function (j) {
-      return transform(j, opts);
-    });
+    return node.children.map((c) => transform(c, {}));
   };
 }
 
@@ -17,32 +15,44 @@ module.exports.transform = transform;
 
 function transform(node, opts) {
   var settings = opts || {};
-  var flattenListItems = settings.flattenListItems || false;
 
   var parentNode = node.parentNode || null;
   var children = [{ text: '' }];
 
   var isList =
-    node.type === 'list' ||
-    node.type === 'numbered-list' ||
-    node.type === 'bulleted-list';
+    node.type === 'list' || node.type === 'ol_list' || node.type === 'ul_list';
 
   if (Array.isArray(node.children) && node.children.length > 0 && isList) {
-    children = node.children.map(function (child) {
-      if (child.children.length) {
-        child.children = child.children
-          .map(function (grandChild) {
-            if (grandChild.type === 'list') {
-              node.children.push(grandChild);
-              return;
-            }
-            return grandChild;
-          })
-          .filter(Boolean);
-      }
+    let lastFriendlyItem;
+    children = node.children
+      .reduce((acc, child) => {
+        if (child.children.length) {
+          const nonListTypeItem = child.children.every(
+            (f) => f.type !== 'list' && f.type !== 'listItem'
+          );
 
-      return child;
-    });
+          if (nonListTypeItem) {
+            lastFriendlyItem = child;
+          }
+
+          child.children = child.children
+            .map(function (grandChild) {
+              if (grandChild.type === 'list') {
+                lastFriendlyItem.children.push(grandChild);
+                return false;
+              }
+              return grandChild;
+            })
+            .filter(Boolean);
+        }
+
+        // if (child.type !== 'paragraph' && child.children.length === 0) {
+        //   return acc;
+        // }
+
+        return [...acc, child];
+      }, [])
+      .filter(Boolean);
   }
 
   if (Array.isArray(node.children) && node.children.length > 0) {
@@ -65,12 +75,12 @@ function transform(node, opts) {
       };
     case 'list':
       return {
-        type: node.ordered ? 'numbered-list' : 'bulleted-list',
+        type: node.ordered ? 'ol_list' : 'ul_list',
         children: children,
       };
     case 'listItem':
       return {
-        type: 'list-item',
+        type: 'list_item',
         children: children,
       };
     case 'emphasis':
@@ -80,19 +90,10 @@ function transform(node, opts) {
     case 'delete':
       return extend(forceLeafNode(children), { strikeThrough: true });
     case 'paragraph':
-      if (
-        flattenListItems &&
-        parentNode &&
-        parentNode.type === 'listItem' &&
-        children[0].type !== 'link'
-      ) {
-        return forceLeafNode(children);
-      } else {
-        return {
-          type: node.type,
-          children: children,
-        };
-      }
+      return {
+        type: node.type,
+        children: children,
+      };
     case 'link':
       return {
         type: node.type,
@@ -101,7 +102,7 @@ function transform(node, opts) {
       };
     case 'blockquote':
       return {
-        type: 'block-quote',
+        type: 'block_quote',
         children: children,
       };
 
@@ -118,10 +119,10 @@ function forceLeafNode(children) {
 }
 
 var depthToHeading = {
-  1: 'heading-one',
-  2: 'heading-two',
-  3: 'heading-three',
-  4: 'heading-four',
-  5: 'heading-five',
-  6: 'heading-six',
+  1: 'heading_one',
+  2: 'heading_two',
+  3: 'heading_three',
+  4: 'heading_four',
+  5: 'heading_five',
+  6: 'heading_six',
 };

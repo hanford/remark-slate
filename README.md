@@ -65,7 +65,7 @@ Would result in the following:
 ```json
 [
   {
-    "type": "heading-one",
+    "type": "heading_one",
     "children": [
       {
         "text": "Heading one"
@@ -73,7 +73,7 @@ Would result in the following:
     ]
   },
   {
-    "type": "heading-two",
+    "type": "heading_two",
     "children": [
       {
         "text": "Heading two"
@@ -81,7 +81,7 @@ Would result in the following:
     ]
   },
   {
-    "type": "heading-three",
+    "type": "heading_three",
     "children": [
       {
         "text": "Heading three"
@@ -89,7 +89,7 @@ Would result in the following:
     ]
   },
   {
-    "type": "heading-four",
+    "type": "heading_four",
     "children": [
       {
         "text": "Heading four"
@@ -97,7 +97,7 @@ Would result in the following:
     ]
   },
   {
-    "type": "heading-five",
+    "type": "heading_five",
     "children": [
       {
         "text": "Heading five"
@@ -105,7 +105,7 @@ Would result in the following:
     ]
   },
   {
-    "type": "heading-six",
+    "type": "heading_six",
     "children": [
       {
         "text": "Heading six"
@@ -162,7 +162,7 @@ Would result in the following:
     ]
   },
   {
-    "type": "block-quote",
+    "type": "block_quote",
     "children": [
       {
         "type": "paragraph",
@@ -175,10 +175,10 @@ Would result in the following:
     ]
   },
   {
-    "type": "bulleted-list",
+    "type": "ul_list",
     "children": [
       {
-        "type": "list-item",
+        "type": "list_item",
         "children": [
           {
             "type": "paragraph",
@@ -191,7 +191,7 @@ Would result in the following:
         ]
       },
       {
-        "type": "list-item",
+        "type": "list_item",
         "children": [
           {
             "type": "paragraph",
@@ -206,10 +206,10 @@ Would result in the following:
     ]
   },
   {
-    "type": "numbered-list",
+    "type": "ol_list",
     "children": [
       {
-        "type": "list-item",
+        "type": "list_item",
         "children": [
           {
             "type": "paragraph",
@@ -222,7 +222,7 @@ Would result in the following:
         ]
       },
       {
-        "type": "list-item",
+        "type": "list_item",
         "children": [
           {
             "type": "paragraph",
@@ -251,7 +251,7 @@ Would result in the following:
 
 ```json
 {
-  "type": "heading-one",
+  "type": "heading_one",
   "children": [{ "text": "Big text" }]
 }
 ```
