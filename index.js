@@ -70,14 +70,6 @@ function transform(node, opts) {
         children: children,
       };
 
-    case 'html':
-      if (node.value === '<br>') {
-        return {
-          type: 'paragraph',
-          children: [{ text: '' }],
-        };
-      }
-
     case 'text':
     default:
       return {
