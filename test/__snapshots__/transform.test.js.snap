@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Transform a paragraph and assign the new nodeType 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "random text",
+    },
+  ],
+  "type": "p",
+}
+`;
+
 exports[`Transform heading depth two without changing the default nodeTypes while passing other overrides 1`] = `
 Object {
   "children": Array [
