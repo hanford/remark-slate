@@ -1,6 +1,6 @@
 'use strict';
 
-var extend = require('xtend');
+var merge = require('merge');
 
 module.exports = plugin;
 
@@ -12,9 +12,12 @@ function plugin(opts) {
 }
 
 module.exports.transform = transform;
+module.exports.nodeTypes = nodeTypes;
 
 function transform(node, opts) {
   var settings = opts || {};
+  var userTypes = settings.nodeTypes || {};
+  var types = merge.recursive(nodeTypes, userTypes);
 
   var parentNode = node.parentNode || null;
   var children = [{ text: '' }];
@@ -22,7 +25,7 @@ function transform(node, opts) {
   if (Array.isArray(node.children) && node.children.length > 0) {
     children = node.children.map(function (c) {
       return transform(
-        extend(c, {
+        merge(c, {
           parentNode: node,
           ordered: node.ordered || false,
         }),
@@ -34,46 +37,46 @@ function transform(node, opts) {
   switch (node.type) {
     case 'heading':
       return {
-        type: depthToHeading[node.depth],
+        type: types.heading[node.depth],
         children: children,
       };
     case 'list':
       return {
-        type: node.ordered ? 'ol_list' : 'ul_list',
+        type: node.ordered ? types.ol_list : types.ul_list,
         children: children,
       };
     case 'listItem':
       return {
-        type: 'list_item',
+        type: types.listItem,
         children: children,
       };
     case 'emphasis':
-      return extend(forceLeafNode(children), { italic: true });
+      return merge(forceLeafNode(children), { italic: true });
     case 'strong':
-      return extend(forceLeafNode(children), { bold: true });
+      return merge(forceLeafNode(children), { bold: true });
     case 'delete':
-      return extend(forceLeafNode(children), { strikeThrough: true });
+      return merge(forceLeafNode(children), { strikeThrough: true });
     case 'paragraph':
       return {
-        type: node.type,
+        type: types.paragraph,
         children: children,
       };
     case 'link':
       return {
-        type: node.type,
+        type: types.link,
         link: node.url,
         children: children,
       };
     case 'blockquote':
       return {
-        type: 'block_quote',
+        type: types.block_quote,
         children: children,
       };
 
     case 'html':
       if (node.value === '<br>') {
         return {
-          type: 'paragraph',
+          type: types.paragraph,
           children: [{ text: '' }],
         };
       }
@@ -90,11 +93,19 @@ function forceLeafNode(children) {
   return { text: children.map((k) => k.text).join('') };
 }
 
-var depthToHeading = {
-  1: 'heading_one',
-  2: 'heading_two',
-  3: 'heading_three',
-  4: 'heading_four',
-  5: 'heading_five',
-  6: 'heading_six',
+var nodeTypes = {
+  paragraph: 'paragraph',
+  block_quote: 'block_quote',
+  link: 'link',
+  ul_list: 'ul_list',
+  ol_list: 'ol_list',
+  listItem: 'list_item',
+  heading: {
+    1: 'heading_one',
+    2: 'heading_two',
+    3: 'heading_three',
+    4: 'heading_four',
+    5: 'heading_five',
+    6: 'heading_three',
+  },
 };

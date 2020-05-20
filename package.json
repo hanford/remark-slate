@@ -18,13 +18,14 @@
   "bugs": "https://github.com/hanford/remark-slate/issues",
   "author": "Jack Hanford <jackhanford@gmail.com> (https://jackhanford.com)",
   "contributors": [
-    "Jack Hanford <jackhanford@gmail.com> (https://jackhanford.com)"
+    "Jack Hanford <jackhanford@gmail.com> (https://jackhanford.com)",
+    "Horacio Herrera <hi@horacioh.com> (https://horacioh.com)"
   ],
   "files": [
     "./index.js"
   ],
   "dependencies": {
-    "xtend": "^4.0.2"
+    "merge": "^1.2.1"
   },
   "devDependencies": {
     "jest": "^25.2.4",

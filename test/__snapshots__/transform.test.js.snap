@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Transform heading depth two without changing the default nodeTypes while passing other overrides 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "yo",
+    },
+  ],
+  "type": "heading_two",
+}
+`;
+
 exports[`inserts empty text block if no children are given 1`] = `
 Object {
   "children": Array [
@@ -177,6 +188,17 @@ Object {
     },
   ],
   "type": "heading_one",
+}
+`;
+
+exports[`transforms heading depth one to slate state object with custom node types & {type: "h1", children: [{text: "hey"}]} 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "hey",
+    },
+  ],
+  "type": "h1",
 }
 `;
 

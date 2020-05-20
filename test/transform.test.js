@@ -51,3 +51,21 @@ it('inserts empty text block if no children are given', () => {
     })
   ).toMatchSnapshot();
 });
+
+it('transforms heading depth one to slate state object with custom node types & {type: "h1", children: [{text: "hey"}]}', () => {
+  expect(
+    transform(
+      { type: 'heading', depth: 1, children: [{ value: 'hey' }] },
+      { nodeTypes: { heading: { 1: 'h1' } } }
+    )
+  ).toMatchSnapshot();
+});
+
+it('Transform heading depth two without changing the default nodeTypes while passing other overrides', () => {
+  expect(
+    transform(
+      { type: 'heading', depth: 2, children: [{ value: 'yo' }] },
+      { nodeTypes: { heading: { 1: 'h1' } } }
+    )
+  ).toMatchSnapshot();
+});
