@@ -7,9 +7,11 @@ module.exports = plugin;
 function plugin(opts) {
   var settings = opts || {};
   var userTypes = settings.nodeTypes || {};
-  var nodeTypes = merge.recursive(defaultNodeTypes, userTypes);
+  var nodeTypes = merge(defaultNodeTypes, userTypes);
   this.Compiler = function compiler(node) {
-    return node.children.map((c) => transform(c, merge(settings, nodeTypes)));
+    return node.children.map((c) =>
+      transform(c, merge(settings, { nodeTypes }))
+    );
   };
 }
 
