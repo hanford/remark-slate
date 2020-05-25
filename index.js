@@ -1,23 +1,27 @@
 'use strict';
 
-var merge = require('merge');
+var merge = require('deepmerge');
 
 module.exports = plugin;
 
 function plugin(opts) {
   var settings = opts || {};
+  var userTypes = settings.nodeTypes || {};
+  var nodeTypes = merge(defaultNodeTypes, userTypes);
   this.Compiler = function compiler(node) {
-    return node.children.map((c) => transform(c, {}));
+    return node.children.map((c) =>
+      transform(c, merge(settings, { nodeTypes }))
+    );
   };
 }
 
 module.exports.transform = transform;
-module.exports.nodeTypes = nodeTypes;
+module.exports.defaultNodeTypes = defaultNodeTypes;
 
 function transform(node, opts) {
   var settings = opts || {};
   var userTypes = settings.nodeTypes || {};
-  var types = merge.recursive(nodeTypes, userTypes);
+  var types = merge(defaultNodeTypes, userTypes);
 
   var parentNode = node.parentNode || null;
   var children = [{ text: '' }];
@@ -93,7 +97,7 @@ function forceLeafNode(children) {
   return { text: children.map((k) => k.text).join('') };
 }
 
-var nodeTypes = {
+var defaultNodeTypes = {
   paragraph: 'paragraph',
   block_quote: 'block_quote',
   link: 'link',

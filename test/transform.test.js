@@ -69,3 +69,12 @@ it('Transform heading depth two without changing the default nodeTypes while pas
     )
   ).toMatchSnapshot();
 });
+
+it('Transform a paragraph and assign the new nodeType', () => {
+  expect(
+    transform(
+      { type: 'paragraph', children: [{ value: 'random text' }] },
+      { nodeTypes: { paragraph: 'p' } }
+    )
+  ).toMatchSnapshot();
+});
