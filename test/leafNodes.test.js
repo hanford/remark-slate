@@ -147,3 +147,37 @@ it('Transform a leaf node with just strikethrough', () => {
     })
   ).toMatchSnapshot();
 });
+
+it('Handles cases where leafs have metadata attached', () => {
+  expect(
+    transform({
+      type: 'link',
+      url: 'https://jackhanford.com',
+      children: [
+        {
+          type: 'paragraph',
+          children: [
+            {
+              type: 'strong',
+              children: [
+                {
+                  type: 'emphasis',
+                  children: [
+                    {
+                      type: 'delete',
+                      children: [
+                        {
+                          value: 'strikethrough text',
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});

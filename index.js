@@ -115,8 +115,9 @@ function forceLeafNode(children) {
 function persistLeafFormats(children) {
   return children.reduce((acc, node) => {
     Object.keys(node).forEach(function (key) {
-      if (key === 'children' || key === 'text') return;
-      acc[key] = true;
+      if (key === 'children' || key === 'type' || key === 'text') return;
+
+      acc[key] = node[key];
     });
 
     return acc;

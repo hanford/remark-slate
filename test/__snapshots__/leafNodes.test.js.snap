@@ -1,5 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Handles cases where leafs have metadata attached 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "children": Array [
+        Object {
+          "bold": true,
+          "italic": true,
+          "strikeThrough": true,
+          "text": "strikethrough text",
+        },
+      ],
+      "type": "paragraph",
+    },
+  ],
+  "link": "https://jackhanford.com",
+  "type": "link",
+}
+`;
+
 exports[`Transform a complex leaf node with bold and emphasis 1`] = `
 Object {
   "children": Array [
