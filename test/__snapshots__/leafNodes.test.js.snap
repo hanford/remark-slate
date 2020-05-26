@@ -1,0 +1,89 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Transform a complex leaf node with bold and emphasis 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "bold": true,
+      "italic": true,
+      "text": "bold and italic",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
+exports[`Transform a complex leaf node with delete and bold 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "bold": true,
+      "strikeThrough": true,
+      "text": "strikethrough and bold",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
+exports[`Transform a complex leaf node with delete and italic 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "italic": true,
+      "strikeThrough": true,
+      "text": "strikethrough and italic",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
+exports[`Transform a complex leaf node with emphasis and bold 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "bold": true,
+      "italic": true,
+      "text": "italic and bold",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
+exports[`Transform a leaf node with just bold 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "bold": true,
+      "text": "bold text",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
+exports[`Transform a leaf node with just italic 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "italic": true,
+      "text": "Italic text",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
+exports[`Transform a leaf node with just strikethrough 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "strikeThrough": true,
+      "text": "strikethrough text",
+    },
+  ],
+  "type": "paragraph",
+}
+`;

@@ -55,11 +55,23 @@ function transform(node, opts) {
         children: children,
       };
     case 'emphasis':
-      return merge(forceLeafNode(children), { italic: true });
+      return merge.all([
+        forceLeafNode(children),
+        { italic: true },
+        persistLeafFormats(children),
+      ]);
     case 'strong':
-      return merge(forceLeafNode(children), { bold: true });
+      return merge.all([
+        forceLeafNode(children),
+        { bold: true },
+        persistLeafFormats(children),
+      ]);
     case 'delete':
-      return merge(forceLeafNode(children), { strikeThrough: true });
+      return merge.all([
+        forceLeafNode(children),
+        { strikeThrough: true },
+        persistLeafFormats(children),
+      ]);
     case 'paragraph':
       return {
         type: types.paragraph,
@@ -95,6 +107,20 @@ function transform(node, opts) {
 
 function forceLeafNode(children) {
   return { text: children.map((k) => k.text).join('') };
+}
+
+// This function is will take any unknown keys, and bring them up a level
+// allowing leaf nodes to have many different formats at once
+// for example, bold and italic on the same node
+function persistLeafFormats(children) {
+  return children.reduce((acc, node) => {
+    Object.keys(node).forEach(function (key) {
+      if (key === 'children' || key === 'text') return;
+      acc[key] = true;
+    });
+
+    return acc;
+  }, {});
 }
 
 var defaultNodeTypes = {
