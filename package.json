@@ -25,6 +25,7 @@
     "./index.js"
   ],
   "dependencies": {
+    "deepmerge": "^4.2.2",
     "merge": "^1.2.1"
   },
   "devDependencies": {
