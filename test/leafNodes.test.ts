@@ -1,6 +1,4 @@
-const plugin = require('../');
-
-const transform = plugin.transform;
+import { transform } from '../src';
 
 it('Transform a complex leaf node with bold and emphasis', () => {
   expect(

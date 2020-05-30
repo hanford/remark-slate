@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`transforms link 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "Personal website",
+    },
+  ],
+  "link": "https://jackhanford.com",
+  "type": "link",
+}
+`;

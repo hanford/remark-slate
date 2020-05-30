@@ -1,27 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Transform a paragraph and assign the new nodeType 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "text": "random text",
-    },
-  ],
-  "type": "p",
-}
-`;
-
-exports[`Transform heading depth two without changing the default nodeTypes while passing other overrides 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "text": "yo",
-    },
-  ],
-  "type": "heading_two",
-}
-`;
-
 exports[`inserts empty text block if no children are given 1`] = `
 Object {
   "children": Array [
@@ -202,17 +180,6 @@ Object {
 }
 `;
 
-exports[`transforms heading depth one to slate state object with custom node types & {type: "h1", children: [{text: "hey"}]} 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "text": "hey",
-    },
-  ],
-  "type": "h1",
-}
-`;
-
 exports[`transforms heading depth three to slate state object with {type: "heading-three", children: [{text: "heading three"}]} 1`] = `
 Object {
   "children": Array [
@@ -232,17 +199,5 @@ Object {
     },
   ],
   "type": "heading_two",
-}
-`;
-
-exports[`transforms link 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "text": "Personal website",
-    },
-  ],
-  "link": "https://jackhanford.com",
-  "type": "link",
 }
 `;
