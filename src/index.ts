@@ -1,4 +1,4 @@
-import plugin, { transform, defaultNodeTypes } from './serializer';
+import plugin, { transform, defaultNodeTypes } from './deserializer';
 
 export { transform, defaultNodeTypes };
 

@@ -17,7 +17,7 @@ interface OptionType {
   };
 }
 
-interface BlockNode {
+interface MdastNode {
   position?: any;
   type?:
     | 'list'
@@ -34,7 +34,7 @@ interface BlockNode {
   ordered?: boolean;
   value?: string;
   text?: string;
-  children?: Array<BlockNode>;
+  children?: Array<MdastNode>;
   depth?: 1 | 2 | 3 | 4 | 5 | 6;
   url?: string;
 }
@@ -57,7 +57,7 @@ export const defaultNodeTypes = {
 };
 
 export default function plugin(opts?: OptionType) {
-  const compiler = (node: { children: Array<BlockNode> }) => {
+  const compiler = (node: { children: Array<MdastNode> }) => {
     return node.children.map((c) => transform(c, opts));
   };
 
@@ -66,7 +66,7 @@ export default function plugin(opts?: OptionType) {
 }
 
 export function transform(
-  node: BlockNode,
+  node: MdastNode,
   opts: OptionType = { nodeTypes: {} }
 ) {
   const types = {
@@ -86,7 +86,7 @@ export function transform(
     node.children.length > 0
   ) {
     // @ts-ignore
-    children = node.children.map((c: BlockNode) =>
+    children = node.children.map((c: MdastNode) =>
       transform(
         {
           ...c,
@@ -152,7 +152,7 @@ const forceLeafNode = (children: Array<{ text?: string }>) => ({
 // This function is will take any unknown keys, and bring them up a level
 // allowing leaf nodes to have many different formats at once
 // for example, bold and italic on the same node
-function persistLeafFormats(children: Array<BlockNode>) {
+function persistLeafFormats(children: Array<MdastNode>) {
   return children.reduce((acc, node) => {
     Object.keys(node).forEach(function (key) {
       if (key === 'children' || key === 'type' || key === 'text') return;
