@@ -19,18 +19,6 @@ export interface OptionType {
   nodeTypes: NodeTypes;
 }
 
-// | 'list'
-// | 'listItem'
-// | 'paragraph'
-// | 'blockquote'
-// | 'html'
-// | 'emphasis'
-// | 'strong'
-// | 'delete'
-// | 'text'
-// | 'link'
-// | 'heading';
-
 export interface MdastNode {
   type?: string;
   ordered?: boolean;

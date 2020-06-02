@@ -51,50 +51,47 @@ export default function serialize(
 
   const LIST_TYPES = [nodeTypes.ul_list, nodeTypes.ol_list];
 
-  let children: string =
-    isLeafNode(chunk) === false
-      ? // if we have a type, we're a BlockType element which _always_ has a children array.
-        (chunk as BlockType).children
-          .map((c: BlockType | LeafType) => {
-            const isList = LIST_TYPES.includes((c as BlockType).type || '');
-            const selfIsList = LIST_TYPES.includes(
-              (chunk as BlockType).type || ''
-            );
+  let children = text;
 
-            let childrenHasLink = false;
+  if (!isLeafNode(chunk)) {
+    children = chunk.children
+      .map((c: BlockType | LeafType) => {
+        const isList = !isLeafNode(c)
+          ? LIST_TYPES.includes(c.type || '')
+          : false;
+        const selfIsList = LIST_TYPES.includes(chunk.type || '');
 
-            if (!isLeafNode(chunk) && Array.isArray(chunk.children)) {
-              childrenHasLink = chunk.children.some(
-                (f) => !isLeafNode(f) && f.type === 'link'
-              );
-            }
+        let childrenHasLink = false;
 
-            return serialize(
-              { ...c, parentType: type },
-              {
-                nodeTypes,
-                // WOAH.
-                // what we're doing here is pretty tricky, it relates to the block below where
-                // we check for ignoreParagraphNewline and set type to paragraph.
-                // We want to strip out empty paragraphs sometimes, but other times we don't.
-                // If we're the descendant of a list, we know we don't want a bunch
-                // of whitespace. If we're parallel to a link we also don't want
-                // to respect neighboring paragraphs
-                ignoreParagraphNewline:
-                  ignoreParagraphNewline ||
-                  isList ||
-                  selfIsList ||
-                  childrenHasLink,
+        if (!isLeafNode(chunk) && Array.isArray(chunk.children)) {
+          childrenHasLink = chunk.children.some(
+            (f) => !isLeafNode(f) && f.type === 'link'
+          );
+        }
 
-                // track depth of nested lists so we can add proper spacing
-                listDepth: LIST_TYPES.includes((c as BlockType).type || '')
-                  ? listDepth + 1
-                  : listDepth,
-              }
-            );
-          })
-          .join('')
-      : text;
+        return serialize(
+          { ...c, parentType: type },
+          {
+            nodeTypes,
+            // WOAH.
+            // what we're doing here is pretty tricky, it relates to the block below where
+            // we check for ignoreParagraphNewline and set type to paragraph.
+            // We want to strip out empty paragraphs sometimes, but other times we don't.
+            // If we're the descendant of a list, we know we don't want a bunch
+            // of whitespace. If we're parallel to a link we also don't want
+            // to respect neighboring paragraphs
+            ignoreParagraphNewline:
+              ignoreParagraphNewline || isList || selfIsList || childrenHasLink,
+
+            // track depth of nested lists so we can add proper spacing
+            listDepth: LIST_TYPES.includes((c as BlockType).type || '')
+              ? listDepth + 1
+              : listDepth,
+          }
+        );
+      })
+      .join('');
+  }
 
   // This is pretty fragile code, check the long comment where we iterate over children
   if (

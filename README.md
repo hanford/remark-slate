@@ -11,7 +11,7 @@
 
 ### Serializing from slate object to markdown:
 
-`remark-slate` exports a relatively opinionated `serialize` function that is meant to be invoked with a slate 0.50+ state object and will transform the object into a markdown document.
+`remark-slate` exports an opinionated `serialize` function that is meant to be invoked with a `slate 0.50+` state object and will transform the object into a markdown document.
 
 ```js
 import { serialize } from 'remark-slate';
