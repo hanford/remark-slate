@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`transforms link 1`] = `
+exports[`deserialize link 1`] = `
 Object {
   "children": Array [
     Object {

@@ -1,8 +1,8 @@
-import { transform } from '../../src';
+import { deserialize } from '../../src';
 
-it('Transform a complex leaf node with bold and emphasis', () => {
+it('Deserialize a complex leaf node with bold and emphasis', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -23,9 +23,9 @@ it('Transform a complex leaf node with bold and emphasis', () => {
   ).toMatchSnapshot();
 });
 
-it('Transform a complex leaf node with emphasis and bold', () => {
+it('Deserialize a complex leaf node with emphasis and bold', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -46,9 +46,9 @@ it('Transform a complex leaf node with emphasis and bold', () => {
   ).toMatchSnapshot();
 });
 
-it('Transform a complex leaf node with delete and bold', () => {
+it('Deserialize a complex leaf node with delete and bold', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -69,9 +69,9 @@ it('Transform a complex leaf node with delete and bold', () => {
   ).toMatchSnapshot();
 });
 
-it('Transform a complex leaf node with delete and italic', () => {
+it('Deserialize a complex leaf node with delete and italic', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -92,9 +92,9 @@ it('Transform a complex leaf node with delete and italic', () => {
   ).toMatchSnapshot();
 });
 
-it('Transform a leaf node with just italic', () => {
+it('Deserialize a leaf node with just italic', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -110,9 +110,9 @@ it('Transform a leaf node with just italic', () => {
   ).toMatchSnapshot();
 });
 
-it('Transform a leaf node with just bold', () => {
+it('Deserialize a leaf node with just bold', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -128,9 +128,9 @@ it('Transform a leaf node with just bold', () => {
   ).toMatchSnapshot();
 });
 
-it('Transform a leaf node with just strikethrough', () => {
+it('Deserialize a leaf node with just strikethrough', () => {
   expect(
-    transform({
+    deserialize({
       type: 'paragraph',
       children: [
         {
@@ -148,7 +148,7 @@ it('Transform a leaf node with just strikethrough', () => {
 
 it('Handles cases where leafs have metadata attached', () => {
   expect(
-    transform({
+    deserialize({
       type: 'link',
       url: 'https://jackhanford.com',
       children: [

@@ -1,7 +1,7 @@
-import plugin, { transform, defaultNodeTypes } from './deserializer';
+import deserialize, { defaultNodeTypes } from './deserialize';
+import serialize from './serialize';
+import plugin from './plugin';
 
-export { transform, defaultNodeTypes };
+export { deserialize, serialize, defaultNodeTypes };
 
 export default plugin;
-
-export { default as serialize } from './serializer';

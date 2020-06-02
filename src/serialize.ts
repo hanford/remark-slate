@@ -1,4 +1,4 @@
-import { defaultNodeTypes, NodeTypes } from './deserializer';
+import { defaultNodeTypes, NodeTypes } from './deserialize';
 
 interface LeafType {
   text: string;
@@ -15,14 +15,6 @@ interface BlockType {
   link?: string;
   children: Array<BlockType | LeafType>;
 }
-
-// {
-//   "type": "text",
-//   "value":"fooo",
-//   "position":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"indent":[]},
-//   "parentNode":{"type":"paragraph","children":[{"type":"text","value":"fooo","position":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"indent":[]}}],"position":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"indent":[]}},
-//   "ordered":false
-// }
 
 interface Options {
   nodeTypes: NodeTypes;

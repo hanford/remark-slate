@@ -1,8 +1,8 @@
-import { transform } from '../../src';
+import { deserialize } from '../../src';
 
-it('transforms link', () => {
+it('deserialize link', () => {
   expect(
-    transform({
+    deserialize({
       type: 'link',
       url: 'https://jackhanford.com',
       children: [{ value: 'Personal website' }],

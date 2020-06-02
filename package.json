@@ -34,14 +34,12 @@
     "dist",
     "src"
   ],
-  "dependencies": {
-    "deepmerge": "^4.2.2"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "husky": "^4.2.5",
     "jest": "^25.2.4",
     "prettier": "^2.0.0",
     "remark": "^11.0.0",
-    "husky": "^4.2.5",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.3"

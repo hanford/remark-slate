@@ -15,23 +15,24 @@ export interface NodeTypes {
   };
 }
 
-interface OptionType {
+export interface OptionType {
   nodeTypes: NodeTypes;
 }
 
-interface MdastNode {
-  type?:
-    | 'list'
-    | 'listItem'
-    | 'paragraph'
-    | 'blockquote'
-    | 'html'
-    | 'emphasis'
-    | 'strong'
-    | 'delete'
-    | 'text'
-    | 'link'
-    | 'heading';
+// | 'list'
+// | 'listItem'
+// | 'paragraph'
+// | 'blockquote'
+// | 'html'
+// | 'emphasis'
+// | 'strong'
+// | 'delete'
+// | 'text'
+// | 'link'
+// | 'heading';
+
+export interface MdastNode {
+  type?: string;
   ordered?: boolean;
   value?: string;
   text?: string;
@@ -62,16 +63,7 @@ export const defaultNodeTypes = {
   },
 };
 
-export default function plugin(opts?: OptionType) {
-  const compiler = (node: { children: Array<MdastNode> }) => {
-    return node.children.map((c) => transform(c, opts));
-  };
-
-  // @ts-ignore
-  this.Compiler = compiler;
-}
-
-export function transform(
+export default function deserialize(
   node: MdastNode,
   opts: OptionType = { nodeTypes: {} }
 ) {
@@ -93,7 +85,7 @@ export function transform(
   ) {
     // @ts-ignore
     children = node.children.map((c: MdastNode) =>
-      transform(
+      deserialize(
         {
           ...c,
           ordered: node.ordered || false,
