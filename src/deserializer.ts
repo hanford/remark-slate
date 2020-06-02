@@ -1,20 +1,22 @@
-interface OptionType {
-  nodeTypes: {
-    paragraph?: string;
-    block_quote?: string;
-    link?: string;
-    ul_list?: string;
-    ol_list?: string;
-    listItem?: string;
-    heading?: {
-      1?: string;
-      2?: string;
-      3?: string;
-      4?: string;
-      5?: string;
-      6?: string;
-    };
+export interface NodeTypes {
+  paragraph?: string;
+  block_quote?: string;
+  link?: string;
+  ul_list?: string;
+  ol_list?: string;
+  listItem?: string;
+  heading?: {
+    1?: string;
+    2?: string;
+    3?: string;
+    4?: string;
+    5?: string;
+    6?: string;
   };
+}
+
+interface OptionType {
+  nodeTypes: NodeTypes;
 }
 
 interface MdastNode {
