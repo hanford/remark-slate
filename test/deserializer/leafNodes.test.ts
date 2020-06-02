@@ -1,4 +1,4 @@
-import { transform } from '../src';
+import { transform } from '../../src';
 
 it('Transform a complex leaf node with bold and emphasis', () => {
   expect(

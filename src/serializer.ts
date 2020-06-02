@@ -6,6 +6,7 @@ interface LeafType {
   bold?: boolean;
   italic?: boolean;
   parentType?: string;
+  position: any;
 }
 
 interface BlockType {
@@ -15,13 +16,21 @@ interface BlockType {
   children: Array<BlockType | LeafType>;
 }
 
+// {
+//   "type": "text",
+//   "value":"fooo",
+//   "position":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"indent":[]},
+//   "parentNode":{"type":"paragraph","children":[{"type":"text","value":"fooo","position":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"indent":[]}}],"position":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"indent":[]}},
+//   "ordered":false
+// }
+
 interface Options {
   nodeTypes: NodeTypes;
   listDepth?: number;
   ignoreParagraphNewline?: boolean;
 }
 
-const isText = (node: BlockType | LeafType) => {
+const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
   return typeof (node as LeafType).text === 'string';
 };
 
@@ -50,7 +59,7 @@ export default function serialize(
   const LIST_TYPES = [nodeTypes.ul_list, nodeTypes.ol_list];
 
   let children: string =
-    isText(chunk) === false
+    isLeafNode(chunk) === false
       ? // if we have a type, we're a BlockType element which _always_ has a children array.
         (chunk as BlockType).children
           .map((c: BlockType | LeafType) => {
@@ -58,11 +67,14 @@ export default function serialize(
             const selfIsList = LIST_TYPES.includes(
               (chunk as BlockType).type || ''
             );
-            const childrenHasLink =
-              Array.isArray((chunk as BlockType).children) &&
-              (chunk as BlockType).children.some(
-                (f) => (f as BlockType).type && (f as BlockType).type === 'link'
+
+            let childrenHasLink = false;
+
+            if (!isLeafNode(chunk) && Array.isArray(chunk.children)) {
+              childrenHasLink = chunk.children.some(
+                (f) => !isLeafNode(f) && f.type === 'link'
               );
+            }
 
             return serialize(
               { ...c, parentType: type },
@@ -110,20 +122,20 @@ export default function serialize(
   // we try applying formatting like to a node like this:
   // "Text foo bar **baz**" resulting in "**Text foo bar **baz****"
   // which is invalid markup and can mess everything up
-  if (children !== BREAK_TAG && isText(chunk)) {
-    if ((chunk as LeafType).bold && (chunk as LeafType).italic) {
+  if (children !== BREAK_TAG && isLeafNode(chunk)) {
+    if (chunk.bold && chunk.italic) {
       children = retainWhitespaceAndFormat(children, '***');
     } else {
-      if ((chunk as LeafType).bold) {
+      if (chunk.bold) {
         children = retainWhitespaceAndFormat(children, '**');
       }
 
-      if ((chunk as LeafType).italic) {
+      if (chunk.italic) {
         children = retainWhitespaceAndFormat(children, '_');
       }
     }
 
-    if ((chunk as LeafType).strikeThrough) {
+    if (chunk.strikeThrough) {
       children = `~~${children}~~`;
     }
   }

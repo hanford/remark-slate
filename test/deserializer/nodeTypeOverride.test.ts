@@ -1,4 +1,4 @@
-import { transform } from '../src';
+import { transform } from '../../src';
 
 it('transforms heading depth one to slate state object with custom node types & {type: "h1", children: [{text: "hey"}]}', () => {
   expect(

@@ -20,7 +20,6 @@ interface OptionType {
 }
 
 interface MdastNode {
-  position?: any;
   type?:
     | 'list'
     | 'listItem'
@@ -39,6 +38,11 @@ interface MdastNode {
   children?: Array<MdastNode>;
   depth?: 1 | 2 | 3 | 4 | 5 | 6;
   url?: string;
+  // mdast metadata
+  position?: any;
+  spread?: any;
+  checked?: any;
+  indent?: any;
 }
 
 export const defaultNodeTypes = {
@@ -115,6 +119,7 @@ export function transform(
 
     // @ts-ignore
     case 'html':
+      // TODO: Handle other HTML?
       if (node.value === '<br>') {
         return {
           type: types.paragraph,

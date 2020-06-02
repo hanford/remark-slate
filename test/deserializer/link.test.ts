@@ -1,4 +1,4 @@
-import { transform } from '../src';
+import { transform } from '../../src';
 
 it('transforms link', () => {
   expect(

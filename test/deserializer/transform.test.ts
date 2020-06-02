@@ -1,5 +1,5 @@
-import { transform } from '../src';
-import complexMdast from './fixtures/complex';
+import { transform } from '../../src';
+import complexMdast from '../fixtures/complex';
 
 it('transforms heading depth one to slate state object with {type: "heading-one", children: [{text: "hey"}]}', () => {
   expect(
