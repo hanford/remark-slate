@@ -32,7 +32,7 @@ export default function serialize(
   opts: Options = { nodeTypes: defaultNodeTypes }
 ) {
   const {
-    nodeTypes: userNodeTypes,
+    nodeTypes: userNodeTypes = defaultNodeTypes,
     ignoreParagraphNewline = false,
     listDepth = 0,
   } = opts;
@@ -59,6 +59,7 @@ export default function serialize(
         const isList = !isLeafNode(c)
           ? LIST_TYPES.includes(c.type || '')
           : false;
+
         const selfIsList = LIST_TYPES.includes(chunk.type || '');
 
         let childrenHasLink = false;
