@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serialize a heading five from slate state to markdown 1`] = `
+"##### Heading five
+"
+`;
+
+exports[`Serialize a heading four from slate state to markdown 1`] = `
+"#### Heading four
+"
+`;
+
+exports[`Serialize a heading one from slate state to markdown 1`] = `
+"# Heading one
+"
+`;
+
+exports[`Serialize a heading six from slate state to markdown 1`] = `
+"###### Heading six
+"
+`;
+
+exports[`Serialize a heading three from slate state to markdown 1`] = `
+"### Heading three
+"
+`;
+
+exports[`Serialize a heading two from slate state to markdown 1`] = `
+"## Heading two
+"
+`;

@@ -6,7 +6,6 @@ interface LeafType {
   bold?: boolean;
   italic?: boolean;
   parentType?: string;
-  position: any;
 }
 
 interface BlockType {
@@ -30,12 +29,14 @@ const BREAK_TAG = '<br>';
 
 export default function serialize(
   chunk: BlockType | LeafType,
-  {
+  opts: Options = { nodeTypes: defaultNodeTypes }
+) {
+  const {
     nodeTypes: userNodeTypes,
     ignoreParagraphNewline = false,
     listDepth = 0,
-  }: Options
-) {
+  } = opts;
+
   let text = (chunk as LeafType).text || '';
   let type = (chunk as BlockType).type || '';
 

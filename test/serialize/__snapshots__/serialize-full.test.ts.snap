@@ -1,0 +1,60 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serializes large slate object into markdown document 1`] = `
+"# Heading one
+## Heading two
+<br>
+
+**Bold**
+_Italic_
+~~Strike through~~
+<br>
+
+[https://google.com](https://google.com)
+[Google](https://google.com)
+<br>
+
+> He said _whattttt_?
+
+<br>
+
+
+1. OL L1 I1
+1. OL L1 I2
+
+   1. OL L2 I1
+   1. OL L2 I2
+
+      1. OL L3 I1
+      1. OL L3 I2
+
+   1. OL L2 I3
+   1. OL L2 I4
+
+1. OL L1 I3
+1. OL L1 I4
+
+<br>
+
+
+- UL L1 I1
+- UL L1 I2
+
+  - UL L2 I1
+  - UL L2 I2
+
+    - UL L3 I1
+    - UL L3 I2
+
+  - UL L2 I3
+  - UL L2 I4
+
+- UL L1 I3
+- UL L1 I4
+
+<br>
+
+<br>
+
+"
+`;

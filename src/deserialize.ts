@@ -59,7 +59,7 @@ export const defaultNodeTypes = {
     3: 'heading_three',
     4: 'heading_four',
     5: 'heading_five',
-    6: 'heading_three',
+    6: 'heading_six',
   },
 };
 
