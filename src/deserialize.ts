@@ -1,42 +1,37 @@
-interface OptionType {
-  nodeTypes: {
-    paragraph?: string;
-    block_quote?: string;
-    link?: string;
-    ul_list?: string;
-    ol_list?: string;
-    listItem?: string;
-    heading?: {
-      1?: string;
-      2?: string;
-      3?: string;
-      4?: string;
-      5?: string;
-      6?: string;
-    };
+export interface NodeTypes {
+  paragraph?: string;
+  block_quote?: string;
+  link?: string;
+  ul_list?: string;
+  ol_list?: string;
+  listItem?: string;
+  heading?: {
+    1?: string;
+    2?: string;
+    3?: string;
+    4?: string;
+    5?: string;
+    6?: string;
   };
 }
 
-interface MdastNode {
-  position?: any;
-  type?:
-    | 'list'
-    | 'listItem'
-    | 'paragraph'
-    | 'blockquote'
-    | 'html'
-    | 'emphasis'
-    | 'strong'
-    | 'delete'
-    | 'text'
-    | 'link'
-    | 'heading';
+export interface OptionType {
+  nodeTypes: NodeTypes;
+}
+
+export interface MdastNode {
+  type?: string;
   ordered?: boolean;
   value?: string;
   text?: string;
   children?: Array<MdastNode>;
   depth?: 1 | 2 | 3 | 4 | 5 | 6;
   url?: string;
+  // mdast metadata
+  position?: any;
+  spread?: any;
+  checked?: any;
+  indent?: any;
 }
 
 export const defaultNodeTypes = {
@@ -52,20 +47,11 @@ export const defaultNodeTypes = {
     3: 'heading_three',
     4: 'heading_four',
     5: 'heading_five',
-    6: 'heading_three',
+    6: 'heading_six',
   },
 };
 
-export default function plugin(opts?: OptionType) {
-  const compiler = (node: { children: Array<MdastNode> }) => {
-    return node.children.map((c) => transform(c, opts));
-  };
-
-  // @ts-ignore
-  this.Compiler = compiler;
-}
-
-export function transform(
+export default function deserialize(
   node: MdastNode,
   opts: OptionType = { nodeTypes: {} }
 ) {
@@ -87,7 +73,7 @@ export function transform(
   ) {
     // @ts-ignore
     children = node.children.map((c: MdastNode) =>
-      transform(
+      deserialize(
         {
           ...c,
           ordered: node.ordered || false,
@@ -111,7 +97,6 @@ export function transform(
     case 'blockquote':
       return { type: types.block_quote, children };
 
-    // @ts-ignore
     case 'html':
       if (node.value === '<br>') {
         return {
@@ -119,6 +104,8 @@ export function transform(
           children: [{ text: '' }],
         };
       }
+      // TODO: Handle other HTML?
+      return {};
 
     case 'emphasis':
       return {

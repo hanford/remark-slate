@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serialize a bold and italic paragraph from slate state to markdown 1`] = `
+"***bold/italic paragraph***
+"
+`;
+
+exports[`Serialize a bold paragraph from slate state to markdown 1`] = `
+"**bold paragraph**
+"
+`;
+
+exports[`Serialize a bold, italic and strikeThrough paragraph from slate state to markdown 1`] = `
+"~~***bold/italic/strikethrough paragraph***~~
+"
+`;
+
+exports[`Serialize a strikeThrough paragraph from slate state to markdown 1`] = `
+"~~strikeThrough paragraph~~
+"
+`;
+
+exports[`Serialize an italic paragraph from slate state to markdown 1`] = `
+"_italic paragraph_
+"
+`;

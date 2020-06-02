@@ -1,17 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`inserts empty text block if no children are given 1`] = `
-Object {
-  "children": Array [
-    Object {
-      "text": "",
-    },
-  ],
-  "type": "heading_one",
-}
-`;
-
-exports[`transforms complex mdast tree derived from ./example.md 1`] = `
+exports[`Deserialize complex mdast tree derived from ./example.md 1`] = `
 Array [
   Object {
     "children": Array [
@@ -169,7 +158,7 @@ Array [
 ]
 `;
 
-exports[`transforms heading depth one to slate state object with {type: "heading-one", children: [{text: "hey"}]} 1`] = `
+exports[`Deserialize heading depth one to slate state object with {type: "heading-one", children: [{text: "hey"}]} 1`] = `
 Object {
   "children": Array [
     Object {
@@ -180,7 +169,7 @@ Object {
 }
 `;
 
-exports[`transforms heading depth three to slate state object with {type: "heading-three", children: [{text: "heading three"}]} 1`] = `
+exports[`Deserialize heading depth three to slate state object with {type: "heading-three", children: [{text: "heading three"}]} 1`] = `
 Object {
   "children": Array [
     Object {
@@ -191,7 +180,7 @@ Object {
 }
 `;
 
-exports[`transforms heading depth two to slate state object with {type: "heading-two", children: [{text: "heading two"}]} 1`] = `
+exports[`Deserialize heading depth two to slate state object with {type: "heading-two", children: [{text: "heading two"}]} 1`] = `
 Object {
   "children": Array [
     Object {
@@ -199,5 +188,16 @@ Object {
     },
   ],
   "type": "heading_two",
+}
+`;
+
+exports[`inserts empty text block if no children are given 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "",
+    },
+  ],
+  "type": "heading_one",
 }
 `;

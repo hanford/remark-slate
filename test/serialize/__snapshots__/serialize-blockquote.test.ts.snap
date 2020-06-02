@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serialize a blockquote from slate state to markdown 1`] = `
+"> Faded af is faded af backwards
+
+"
+`;

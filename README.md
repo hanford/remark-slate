@@ -1,13 +1,46 @@
 # remark-slate
 
+> Transform the contents of a slate 0.50+ editor into markdown and back again.
+
 [![Downloads][downloads-badge]][downloads]
 [![Size][size-badge]][size]
 
 [**remark**][remark] plugin to compile Markdown as a [Slate](https://www.slatejs.org/) 0.50+ compatible object.
 
-This package is meant to be used with [remark-parse](https://github.com/remarkjs/remark/tree/master/packages/remark-parse)
-
 ## Usage
+
+### Serializing from slate object to markdown:
+
+`remark-slate` exports an opinionated `serialize` function that is meant to be invoked with a `slate 0.50+` state object and will transform the object into a markdown document.
+
+```js
+import { serialize } from 'remark-slate';
+
+export default ({ onChange }) => {
+  const [value, setValue] = useState(initialValue);
+
+  React.useEffect(() => {
+    // serialize slate state to a markdown string
+    onChange(value.map((v) => serialize(v)).join());
+  }, [onChange, value]);
+
+  return (
+    <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
+      <Editable
+        renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        placeholder="Enter some rich text…"
+        ...
+      />
+      ...
+    </Slate>
+  );
+};
+```
+
+### Deserializing from markdown to slate object:
+
+When deserializing, this package is meant to be used with [remark-parse](https://github.com/remarkjs/remark/tree/master/packages/remark-parse)
 
 Say we have the following file, `example.md`:
 

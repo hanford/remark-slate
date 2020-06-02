@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serialize a ol list with one level of nesting from slate state to markdown 1`] = `
+"
+- foo
+
+  - bar
+
+- baz
+
+"
+`;
+
+exports[`Serialize a ol list with two levels of nesting from slate state to markdown 1`] = `
+"
+1. foo
+
+   1. bar
+
+      1. boo
+
+   1. baz
+
+1. bell
+
+"
+`;
+
+exports[`Serialize a simple ol list from slate state to markdown 1`] = `
+"
+1. foo
+1. bar
+1. baz
+
+"
+`;
+
+exports[`Serialize a simple ul list from slate state to markdown 1`] = `
+"
+- foo
+- bar
+- baz
+
+"
+`;
+
+exports[`Serialize a ul list with one level of nesting from slate state to markdown 1`] = `
+"
+1. foo
+
+   1. bar
+
+1. baz
+
+"
+`;
+
+exports[`Serialize a ul list with two levels of nesting from slate state to markdown 1`] = `
+"
+- foo
+
+  - bar
+
+    - boo
+
+  - baz
+
+- bell
+
+"
+`;
+
+exports[`Serialize a ul/ol list combo with two levels of nesting from slate state to markdown 1`] = `
+"
+1. foo
+
+  - bar
+
+      1. boo
+
+  - baz
+
+1. bell
+
+"
+`;
