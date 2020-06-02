@@ -109,15 +109,15 @@ export default function deserialize(
     case 'blockquote':
       return { type: types.block_quote, children };
 
-    // @ts-ignore
     case 'html':
-      // TODO: Handle other HTML?
       if (node.value === '<br>') {
         return {
           type: types.paragraph,
           children: [{ text: '' }],
         };
       }
+      // TODO: Handle other HTML?
+      return {};
 
     case 'emphasis':
       return {
