@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Deserialize 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "text": "a
+",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "text": "",
+          },
+        ],
+        "type": "paragraph",
+      },
+    ],
+    "type": "paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "children": Array [
+          Object {
+            "text": "https://a.com",
+          },
+        ],
+        "link": "https://a.com",
+        "type": "link",
+      },
+      Object {
+        "text": "
+",
+      },
+      Object {
+        "children": Array [
+          Object {
+            "text": "",
+          },
+        ],
+        "type": "paragraph",
+      },
+    ],
+    "type": "paragraph",
+  },
+  Object {
+    "children": Array [
+      Object {
+        "text": "e",
+      },
+    ],
+    "type": "paragraph",
+  },
+]
+`;
+
+exports[`Deserialize 2`] = `
+"a
+<br>
+
+[https://a.com](https://a.com)
+
+e
+"
+`;
