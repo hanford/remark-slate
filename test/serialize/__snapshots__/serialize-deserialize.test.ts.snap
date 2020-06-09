@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Deserialize 1`] = `
+exports[`Deserialize and serialize mix of break tags and new lines 1`] = `
 Array [
   Object {
     "children": Array [
@@ -9,6 +9,7 @@ Array [
 ",
       },
       Object {
+        "break": true,
         "children": Array [
           Object {
             "text": "",
@@ -35,6 +36,7 @@ Array [
 ",
       },
       Object {
+        "break": true,
         "children": Array [
           Object {
             "text": "",
@@ -56,12 +58,15 @@ Array [
 ]
 `;
 
-exports[`Deserialize 2`] = `
-"a
-<br>
-
-[https://a.com](https://a.com)
-
-e
-"
+exports[`Deserialize heading with new line 1`] = `
+Array [
+  Object {
+    "children": Array [
+      Object {
+        "text": "heading one",
+      },
+    ],
+    "type": "heading_one",
+  },
+]
 `;

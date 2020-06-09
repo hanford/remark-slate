@@ -1,6 +1,6 @@
 import { defaultNodeTypes, NodeTypes } from './deserialize';
 
-interface LeafType {
+export interface LeafType {
   text: string;
   strikeThrough?: boolean;
   bold?: boolean;
@@ -8,10 +8,11 @@ interface LeafType {
   parentType?: string;
 }
 
-interface BlockType {
+export interface BlockType {
   type: string;
   parentType?: string;
   link?: string;
+  break?: boolean;
   children: Array<BlockType | LeafType>;
 }
 
@@ -62,6 +63,17 @@ export default function serialize(
 
         const selfIsList = LIST_TYPES.includes(chunk.type || '');
 
+        // Links can have the following shape
+        // In which case we don't want to surround
+        // with break tags
+        // {
+        //  type: 'paragraph',
+        //  children: [
+        //    { text: '' },
+        //    { type: 'link', children: [{ text: foo.com }]}
+        //    { text: '' }
+        //  ]
+        // }
         let childrenHasLink = false;
 
         if (!isLeafNode(chunk) && Array.isArray(chunk.children)) {
@@ -82,7 +94,12 @@ export default function serialize(
             // of whitespace. If we're parallel to a link we also don't want
             // to respect neighboring paragraphs
             ignoreParagraphNewline:
-              ignoreParagraphNewline || isList || selfIsList || childrenHasLink,
+              (ignoreParagraphNewline ||
+                isList ||
+                selfIsList ||
+                childrenHasLink) &&
+              // if we have c.break, never ignore empty paragraph new line
+              !(c as BlockType).break,
 
             // track depth of nested lists so we can add proper spacing
             listDepth: LIST_TYPES.includes((c as BlockType).type || '')
@@ -94,12 +111,10 @@ export default function serialize(
       .join('');
   }
 
-  console.log({text, children, chunk})
-
   // This is pretty fragile code, check the long comment where we iterate over children
   if (
     !ignoreParagraphNewline &&
-    text === '' &&
+    (text === '' || text === '\n') &&
     chunk.parentType === nodeTypes.paragraph
   ) {
     type = 'paragraph';
