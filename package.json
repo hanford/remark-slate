@@ -41,9 +41,11 @@
     "jest": "^25.2.4",
     "prettier": "^2.0.0",
     "remark": "^11.0.0",
+    "remark-parse": "^8.0.2",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.3"
+    "typescript": "^3.9.3",
+    "unified": "^9.0.0"
   },
   "prettier": {
     "printWidth": 80,

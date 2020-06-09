@@ -100,6 +100,7 @@ export default function deserialize(
     case 'html':
       if (node.value === '<br>') {
         return {
+          break: true,
           type: types.paragraph,
           children: [{ text: '' }],
         };
