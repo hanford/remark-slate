@@ -1,3 +1,5 @@
+import escapeHtml from 'escape-html';
+
 import { defaultNodeTypes, NodeTypes } from './deserialize';
 
 export interface LeafType {
@@ -191,8 +193,9 @@ export default function serialize(
 
     case nodeTypes.paragraph:
       return `${children}\n`;
+
     default:
-      return children;
+      return escapeHtml(children);
   }
 }
 

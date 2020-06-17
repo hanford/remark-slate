@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serializing content with HTML results in escaped HTML 1`] = `
+"&lt;h1&gt;I have html&lt;/h1&gt;
+"
+`;
+
+exports[`Serializing content with invalid markup results in escaped markup 1`] = `
+"&lt;Box&gt;I have html&lt;/Box&gt;
+"
+`;
