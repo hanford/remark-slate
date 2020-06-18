@@ -98,15 +98,15 @@ export default function deserialize(
       return { type: types.block_quote, children };
 
     case 'html':
-      if (node.value === '<br>') {
+      if (node.value?.includes('<br>')) {
         return {
           break: true,
           type: types.paragraph,
-          children: [{ text: '' }],
+          children: [{ text: node.value?.replace(/<br>/g, '') || '' }],
         };
       }
       // TODO: Handle other HTML?
-      return {};
+      return { type: 'parapgraph', children: [{ text: '' }] };
 
     case 'emphasis':
       return {
