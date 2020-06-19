@@ -21,7 +21,7 @@ export default ({ onChange }) => {
 
   React.useEffect(() => {
     // serialize slate state to a markdown string
-    onChange(value.map((v) => serialize(v)).join());
+    onChange(value.map((v) => serialize(v)).join(''));
   }, [onChange, value]);
 
   return (
