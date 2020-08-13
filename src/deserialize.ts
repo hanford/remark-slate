@@ -1,6 +1,7 @@
 export interface NodeTypes {
   paragraph?: string;
   block_quote?: string;
+  code_block?: string;
   link?: string;
   ul_list?: string;
   ol_list?: string;
@@ -27,6 +28,7 @@ export interface MdastNode {
   children?: Array<MdastNode>;
   depth?: 1 | 2 | 3 | 4 | 5 | 6;
   url?: string;
+  lang?: string;
   // mdast metadata
   position?: any;
   spread?: any;
@@ -37,6 +39,7 @@ export interface MdastNode {
 export const defaultNodeTypes = {
   paragraph: 'paragraph',
   block_quote: 'block_quote',
+  code_block: 'code_block',
   link: 'link',
   ul_list: 'ul_list',
   ol_list: 'ol_list',
@@ -96,6 +99,12 @@ export default function deserialize(
       return { type: types.link, link: node.url, children };
     case 'blockquote':
       return { type: types.block_quote, children };
+    case 'code':
+      return {
+        type: types.code_block,
+        language: node.lang,
+        children: [{ text: node.value }],
+      };
 
     case 'html':
       if (node.value?.includes('<br>')) {

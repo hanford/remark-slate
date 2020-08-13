@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deserialize code block 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "const str = \\"remark-slate\\"
+      for (let char of str) {
+        console.log(char)
+      }",
+    },
+  ],
+  "language": "js",
+  "type": "code_block",
+}
+`;
