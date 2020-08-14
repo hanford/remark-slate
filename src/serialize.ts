@@ -14,6 +14,7 @@ export interface BlockType {
   type: string;
   parentType?: string;
   link?: string;
+  language?: string;
   break?: boolean;
   children: Array<BlockType | LeafType>;
 }
@@ -169,6 +170,11 @@ export default function serialize(
       // as contiued blockquotes, so adding two new lines ensures that doesn't
       // happen
       return `> ${children}\n\n`;
+
+    case nodeTypes.code_block:
+      return `\`\`\`${
+        (chunk as BlockType).language || ''
+      }\n${children}\n\`\`\`\n`;
 
     case nodeTypes.link:
       return `[${children}](${(chunk as BlockType).link || ''})`;

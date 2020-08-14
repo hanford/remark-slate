@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Serialize a code block from slate state to markdown 1`] = `
+"\`\`\`js
+const str = \\\\&quot;remark-slate\\\\&quot;
+          for (let char of str) {
+            console.log(char)
+          }
+\`\`\`
+"
+`;
