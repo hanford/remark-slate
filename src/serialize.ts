@@ -81,7 +81,7 @@ export default function serialize(
 
         if (!isLeafNode(chunk) && Array.isArray(chunk.children)) {
           childrenHasLink = chunk.children.some(
-            (f) => !isLeafNode(f) && f.type === 'link'
+            (f) => !isLeafNode(f) && f.type === nodeTypes.link
           );
         }
 
@@ -120,7 +120,7 @@ export default function serialize(
     (text === '' || text === '\n') &&
     chunk.parentType === nodeTypes.paragraph
   ) {
-    type = 'paragraph';
+    type = nodeTypes.paragraph;
     children = BREAK_TAG;
   }
 
@@ -184,7 +184,7 @@ export default function serialize(
       return `\n${children}\n`;
 
     case nodeTypes.listItem:
-      const isOL = chunk && chunk.parentType === 'ol_list';
+      const isOL = chunk && chunk.parentType === nodeTypes.ol_list;
 
       let spacer = '';
       for (let k = 0; listDepth > k; k++) {
