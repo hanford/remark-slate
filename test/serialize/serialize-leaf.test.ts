@@ -72,3 +72,61 @@ it('Serialize a bold, italic and strikeThrough paragraph from slate state to mar
     })
   ).toMatchSnapshot();
 });
+
+it('Whitespace is retained when applying bold formatting', () => {
+  expect(
+    serialize({
+      type: defaultNodeTypes.paragraph,
+      children: [
+        {
+          bold: true,
+          text: '  bold  ',
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
+
+it('Whitespace is retained when applying italic formatting', () => {
+  expect(
+    serialize({
+      type: defaultNodeTypes.paragraph,
+      children: [
+        {
+          italic: true,
+          text: '  italic  ',
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
+
+it('Whitespace is retained when applying strikethrough formatting', () => {
+  expect(
+    serialize({
+      type: defaultNodeTypes.paragraph,
+      children: [
+        {
+          strikeThrough: true,
+          text: '  strikeThrough  ',
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
+
+it('Whitespace is retained when applying bold, italic and strikethrough formatting', () => {
+  expect(
+    serialize({
+      type: defaultNodeTypes.paragraph,
+      children: [
+        {
+          strikeThrough: true,
+          bold: true,
+          italic: true,
+          text: '  bold, italic, strikeThrough  ',
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
