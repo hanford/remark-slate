@@ -24,3 +24,23 @@ exports[`Serialize an italic paragraph from slate state to markdown 1`] = `
 "_italic paragraph_
 "
 `;
+
+exports[`Whitespace is retained when applying bold formatting 1`] = `
+"  **bold**  
+"
+`;
+
+exports[`Whitespace is retained when applying bold, italic and strikethrough formatting 1`] = `
+"  ~~***bold, italic, strikeThrough***~~  
+"
+`;
+
+exports[`Whitespace is retained when applying italic formatting 1`] = `
+"  _italic_  
+"
+`;
+
+exports[`Whitespace is retained when applying strikethrough formatting 1`] = `
+"  ~~strikeThrough~~  
+"
+`;

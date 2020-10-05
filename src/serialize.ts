@@ -134,7 +134,9 @@ export default function serialize(
   // "Text foo bar **baz**" resulting in "**Text foo bar **baz****"
   // which is invalid markup and can mess everything up
   if (children !== BREAK_TAG && isLeafNode(chunk)) {
-    if (chunk.bold && chunk.italic) {
+    if (chunk.strikeThrough && chunk.bold && chunk.italic) {
+      children = retainWhitespaceAndFormat(children, '~~***');
+    } else if (chunk.bold && chunk.italic) {
       children = retainWhitespaceAndFormat(children, '***');
     } else {
       if (chunk.bold) {
@@ -144,10 +146,10 @@ export default function serialize(
       if (chunk.italic) {
         children = retainWhitespaceAndFormat(children, '_');
       }
-    }
 
-    if (chunk.strikeThrough) {
-      children = `~~${children}~~`;
+      if (chunk.strikeThrough) {
+        children = retainWhitespaceAndFormat(children, '~~');
+      }
     }
   }
 
@@ -216,7 +218,9 @@ function retainWhitespaceAndFormat(string: string, format: string) {
   // children will be mutated
   let children = frozenString;
 
-  const fullFormat = `${format}${children}${format}`;
+  // We reverse the right side formatting, to properly handle bold/italic and strikeThrough
+  // formats, so we can create ~~***FooBar***~~
+  const fullFormat = `${format}${children}${reverseStr(format)}`;
 
   // This conditions accounts for no whitespace in our string
   // if we don't have any, we can return early.
@@ -224,10 +228,13 @@ function retainWhitespaceAndFormat(string: string, format: string) {
     return fullFormat;
   }
 
-  // if we do have whitespace, let's add our formatting
-  // around our trimmed string
-  const formattedString = format + children + format;
+  // if we do have whitespace, let's add our formatting around our trimmed string
+  // We reverse the right side formatting, to properly handle bold/italic and strikeThrough
+  // formats, so we can create ~~***FooBar***~~
+  const formattedString = format + children + reverseStr(format);
 
   // and replace the non-whitespace content of the string
   return string.replace(frozenString, formattedString);
 }
+
+const reverseStr = (string: string) => string.split('').reverse().join('');
