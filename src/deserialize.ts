@@ -14,6 +14,9 @@ export interface NodeTypes {
     5?: string;
     6?: string;
   };
+  emphasis_mark?: string;
+  strong_mark?: string;
+  delete_mark?: string;
 }
 
 export interface OptionType {
@@ -52,6 +55,9 @@ export const defaultNodeTypes = {
     5: 'heading_five',
     6: 'heading_six',
   },
+  emphasis_mark: 'italic',
+  strong_mark: 'bold',
+  delete_mark: 'strikeThrough'
 };
 
 export default function deserialize(
@@ -119,19 +125,19 @@ export default function deserialize(
 
     case 'emphasis':
       return {
-        italic: true,
+        [types.emphasis_mark]: true,
         ...forceLeafNode(children),
         ...persistLeafFormats(children),
       };
     case 'strong':
       return {
-        bold: true,
+        [types.strong_mark]: true,
         ...forceLeafNode(children),
         ...persistLeafFormats(children),
       };
     case 'delete':
       return {
-        strikeThrough: true,
+        [types.delete_mark]: true,
         ...forceLeafNode(children),
         ...persistLeafFormats(children),
       };
