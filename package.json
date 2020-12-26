@@ -3,7 +3,7 @@
   "version": "1.2.2",
   "description": "remark plugin to compile Markdown to a slate compatible object",
   "license": "MIT",
-  "module": "dist/remark-slate-ts.esm.js",
+  "module": "dist/remark-slate.esm.js",
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
