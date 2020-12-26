@@ -57,7 +57,7 @@ export const defaultNodeTypes = {
   },
   emphasis_mark: 'italic',
   strong_mark: 'bold',
-  delete_mark: 'strikeThrough'
+  delete_mark: 'strikeThrough',
 };
 
 export default function deserialize(
