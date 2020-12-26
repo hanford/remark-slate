@@ -115,7 +115,7 @@ export default function deserialize(
         };
       }
       // TODO: Handle other HTML?
-      return { type: 'parapgraph', children: [{ text: '' }] };
+      return { type: 'paragraph', children: [{ text: '' }] };
 
     case 'emphasis':
       return {
