@@ -20,7 +20,8 @@ export interface NodeTypes {
 }
 
 export interface OptionType {
-  nodeTypes: NodeTypes;
+  nodeTypes?: NodeTypes;
+  linkDestinationKey?: string;
 }
 
 export interface MdastNode {
@@ -73,6 +74,8 @@ export default function deserialize(
     },
   };
 
+  const linkDestinationKey = opts.linkDestinationKey ?? 'link';
+
   let children = [{ text: '' }];
 
   if (
@@ -102,7 +105,7 @@ export default function deserialize(
     case 'paragraph':
       return { type: types.paragraph, children };
     case 'link':
-      return { type: types.link, link: node.url, children };
+      return { type: types.link, [linkDestinationKey]: node.url, children };
     case 'blockquote':
       return { type: types.block_quote, children };
     case 'code':

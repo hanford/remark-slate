@@ -9,3 +9,16 @@ it('deserialize link', () => {
     })
   ).toMatchSnapshot();
 });
+
+it('deserialize link with linkDestinationKey', () => {
+  expect(
+    deserialize(
+      {
+        type: 'link',
+        url: 'https://eaze.com',
+        children: [{ value: 'Shopping' }],
+      },
+      { linkDestinationKey: 'custom-value' }
+    )
+  ).toMatchSnapshot();
+});

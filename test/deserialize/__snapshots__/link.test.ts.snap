@@ -11,3 +11,15 @@ Object {
   "type": "link",
 }
 `;
+
+exports[`deserialize link with linkDestinationKey 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "Shopping",
+    },
+  ],
+  "custom-value": "https://eaze.com",
+  "type": "link",
+}
+`;
