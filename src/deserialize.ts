@@ -59,6 +59,7 @@ export const defaultNodeTypes = {
   emphasis_mark: 'italic',
   strong_mark: 'bold',
   delete_mark: 'strikeThrough',
+  thematic_break: 'thematicBreak',
 };
 
 export default function deserialize(
@@ -143,6 +144,10 @@ export default function deserialize(
         [types.delete_mark]: true,
         ...forceLeafNode(children),
         ...persistLeafFormats(children),
+      };
+    case 'thematicBreak':
+      return {
+        [types.thematic_break]: true,
       };
 
     case 'text':
