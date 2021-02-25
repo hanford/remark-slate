@@ -212,6 +212,9 @@ export default function serialize(
     case nodeTypes.paragraph:
       return `${children}\n`;
 
+    case nodeTypes.thematic_break:
+      return `---\n`;
+
     default:
       return escapeHtml(children);
   }
