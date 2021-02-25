@@ -35,6 +35,9 @@ interface Options {
 const isTextLeafNode = (node: BlockType | LeafType): node is TextLeafType => {
   return typeof (node as TextLeafType).text === 'string';
 };
+const isEmptyLeafNode = (node: BlockType | LeafType): node is EmptyLeafType => {
+  return !!(node as EmptyLeafType).thematicBreak;
+};
 const isBlockNode = (node: BlockType | LeafType): node is BlockType => {
   return Array.isArray((node as BlockType).children);
 };
@@ -134,7 +137,7 @@ export default function serialize(
     children = BREAK_TAG;
   }
 
-  if (children === '') return;
+  if (children === '' && !isEmptyLeafNode(chunk)) return;
 
   // Never allow decorating break tags with rich text formatting,
   // this can malform generated markdown
