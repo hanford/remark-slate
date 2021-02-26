@@ -60,7 +60,7 @@ export const defaultNodeTypes: NodeTypes = {
   emphasis_mark: 'italic',
   strong_mark: 'bold',
   delete_mark: 'strikeThrough',
-  thematic_break: 'thematicBreak',
+  thematic_break: 'thematic_break',
 };
 
 export default function deserialize(node: MdastNode, opts?: OptionType) {
