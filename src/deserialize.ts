@@ -1,27 +1,27 @@
 export interface NodeTypes {
-  paragraph?: string;
-  block_quote?: string;
-  code_block?: string;
-  link?: string;
-  ul_list?: string;
-  ol_list?: string;
-  listItem?: string;
-  heading?: {
-    1?: string;
-    2?: string;
-    3?: string;
-    4?: string;
-    5?: string;
-    6?: string;
+  paragraph: string;
+  block_quote: string;
+  code_block: string;
+  link: string;
+  ul_list: string;
+  ol_list: string;
+  listItem: string;
+  heading: {
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
   };
-  emphasis_mark?: string;
-  strong_mark?: string;
-  delete_mark?: string;
+  emphasis_mark: string;
+  strong_mark: string;
+  delete_mark: string;
   thematic_break: string;
 }
 
 export interface OptionType {
-  nodeTypes?: NodeTypes;
+  nodeTypes?: Partial<NodeTypes>;
   linkDestinationKey?: string;
 }
 
@@ -41,7 +41,7 @@ export interface MdastNode {
   indent?: any;
 }
 
-export const defaultNodeTypes = {
+export const defaultNodeTypes: NodeTypes = {
   paragraph: 'paragraph',
   block_quote: 'block_quote',
   code_block: 'code_block',
@@ -63,20 +63,17 @@ export const defaultNodeTypes = {
   thematic_break: 'thematicBreak',
 };
 
-export default function deserialize(
-  node: MdastNode,
-  opts: OptionType = { nodeTypes: {} }
-) {
+export default function deserialize(node: MdastNode, opts?: OptionType) {
   const types = {
     ...defaultNodeTypes,
-    ...opts.nodeTypes,
+    ...opts?.nodeTypes,
     heading: {
       ...defaultNodeTypes.heading,
       ...opts?.nodeTypes?.heading,
     },
   };
 
-  const linkDestinationKey = opts.linkDestinationKey ?? 'link';
+  const linkDestinationKey = opts?.linkDestinationKey ?? 'link';
 
   let children = [{ text: '' }];
 

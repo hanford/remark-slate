@@ -44,7 +44,7 @@ export default function serialize(
   let text = (chunk as LeafType).text || '';
   let type = (chunk as BlockType).type || '';
 
-  const nodeTypes = {
+  const nodeTypes: NodeTypes = {
     ...defaultNodeTypes,
     ...userNodeTypes,
     heading: {
