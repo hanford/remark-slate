@@ -32,14 +32,8 @@ interface Options {
   ignoreParagraphNewline?: boolean;
 }
 
-const isTextLeafNode = (node: BlockType | LeafType): node is TextLeafType => {
-  return typeof (node as TextLeafType).text === 'string';
-};
-const isEmptyLeafNode = (node: BlockType | LeafType): node is EmptyLeafType => {
-  return !!(node as EmptyLeafType).thematicBreak;
-};
-const isBlockNode = (node: BlockType | LeafType): node is BlockType => {
-  return Array.isArray((node as BlockType).children);
+const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
+  return typeof (node as LeafType).text === 'string';
 };
 
 const BREAK_TAG = '<br>';
@@ -70,10 +64,10 @@ export default function serialize(
 
   let children = text;
 
-  if (isBlockNode(chunk)) {
+  if (!isLeafNode(chunk)) {
     children = chunk.children
       .map((c: BlockType | LeafType) => {
-        const isList = isBlockNode(c)
+        const isList = !isLeafNode(c)
           ? LIST_TYPES.includes(c.type || '')
           : false;
 
@@ -92,9 +86,9 @@ export default function serialize(
         // }
         let childrenHasLink = false;
 
-        if (isBlockNode(chunk)) {
+        if (!isLeafNode(chunk) && Array.isArray(chunk.children)) {
           childrenHasLink = chunk.children.some(
-            (f) => isBlockNode(f) && f.type === nodeTypes.link
+            (f) => !isLeafNode(f) && f.type === nodeTypes.link
           );
         }
 
@@ -146,7 +140,7 @@ export default function serialize(
   // we try applying formatting like to a node like this:
   // "Text foo bar **baz**" resulting in "**Text foo bar **baz****"
   // which is invalid markup and can mess everything up
-  if (children !== BREAK_TAG && isTextLeafNode(chunk)) {
+  if (children !== BREAK_TAG && isLeafNode(chunk)) {
     if (chunk.strikeThrough && chunk.bold && chunk.italic) {
       children = retainWhitespaceAndFormat(children, '~~***');
     } else if (chunk.bold && chunk.italic) {
