@@ -2,20 +2,13 @@ import escapeHtml from 'escape-html';
 
 import { defaultNodeTypes, NodeTypes } from './deserialize';
 
-interface TextLeafType {
+export interface LeafType {
   text: string;
   strikeThrough?: boolean;
   bold?: boolean;
   italic?: boolean;
   parentType?: string;
 }
-
-interface EmptyLeafType {
-  thematicBreak?: true;
-  parentType?: string;
-}
-
-export type LeafType = TextLeafType | EmptyLeafType;
 
 export interface BlockType {
   type: string;
@@ -48,7 +41,7 @@ export default function serialize(
     listDepth = 0,
   } = opts;
 
-  let text = (chunk as TextLeafType).text || '';
+  let text = (chunk as LeafType).text || '';
   let type = (chunk as BlockType).type || '';
 
   const nodeTypes = {
