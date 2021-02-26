@@ -17,6 +17,7 @@ export interface NodeTypes {
   emphasis_mark?: string;
   strong_mark?: string;
   delete_mark?: string;
+  thematic_break: string;
 }
 
 export interface OptionType {
