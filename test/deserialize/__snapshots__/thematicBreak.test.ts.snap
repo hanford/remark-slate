@@ -3,7 +3,12 @@
 exports[`When the list has thematic breaks 1`] = `
 Array [
   Object {
-    "thematicBreak": true,
+    "children": Array [
+      Object {
+        "text": "",
+      },
+    ],
+    "type": "thematicBreak",
   },
   Object {
     "children": Array [
