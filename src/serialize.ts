@@ -124,7 +124,7 @@ export default function serialize(
     children = BREAK_TAG;
   }
 
-  if (children === '' && !isEmptyLeafNode(chunk)) return;
+  if (children === '') return;
 
   // Never allow decorating break tags with rich text formatting,
   // this can malform generated markdown
