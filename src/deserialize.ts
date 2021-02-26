@@ -147,7 +147,8 @@ export default function deserialize(
       };
     case 'thematicBreak':
       return {
-        [types.thematic_break]: true,
+        type: types.thematic_break,
+        children: [{ text: '' }],
       };
 
     case 'text':
