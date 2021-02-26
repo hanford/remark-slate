@@ -29,6 +29,8 @@ const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
   return typeof (node as LeafType).text === 'string';
 };
 
+const VOID_ELEMENTS: Array<keyof NodeTypes> = ['thematic_break'];
+
 const BREAK_TAG = '<br>';
 
 export default function serialize(
@@ -44,7 +46,7 @@ export default function serialize(
   let text = (chunk as LeafType).text || '';
   let type = (chunk as BlockType).type || '';
 
-  const nodeTypes = {
+  const nodeTypes: NodeTypes = {
     ...defaultNodeTypes,
     ...userNodeTypes,
     heading: {
@@ -124,7 +126,8 @@ export default function serialize(
     children = BREAK_TAG;
   }
 
-  if (children === '') return;
+  if (children === '' && !VOID_ELEMENTS.find((k) => nodeTypes[k] === type))
+    return;
 
   // Never allow decorating break tags with rich text formatting,
   // this can malform generated markdown
@@ -201,6 +204,9 @@ export default function serialize(
 
     case nodeTypes.paragraph:
       return `${children}\n`;
+
+    case nodeTypes.thematic_break:
+      return `---\n`;
 
     default:
       return escapeHtml(children);
