@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Serialize a heading one from slate state to markdown 1`] = `
+exports[`Serialize a thematic break from slate state to markdown 1`] = `
 "---
 "
 `;

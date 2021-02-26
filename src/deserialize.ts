@@ -20,8 +20,12 @@ export interface NodeTypes {
   thematic_break: string;
 }
 
+type RecursivePartial<T> = {
+  [P in keyof T]?: RecursivePartial<T[P]>;
+};
+
 export interface OptionType {
-  nodeTypes?: Partial<NodeTypes>;
+  nodeTypes?: RecursivePartial<NodeTypes>;
   linkDestinationKey?: string;
 }
 
