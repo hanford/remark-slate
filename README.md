@@ -7,9 +7,18 @@
 
 [**remark**][remark] plugin to compile Markdown as a [Slate](https://www.slatejs.org/) 0.50+ compatible object.
 
+- [Slate ➡️ Markdown:](#slate-object-to-markdown)
+- [Markdown ➡️ Slate object:](#markdown-to-slate-object)
+- [Miscellaneous](#miscellaneous)
+- [Local Development](#local-development)
+  - [`npm start` or `yarn start`](#npm-start-or-yarn-start)
+  - [`npm run build` or `yarn build`](#npm-run-build-or-yarn-build)
+  - [`npm test` or `yarn test`](#npm-test-or-yarn-test)
+- [License (MIT)](#license-mit)
+
 ## Usage
 
-### Serializing from slate object to markdown:
+### Slate object to Markdown:
 
 `remark-slate` exports an opinionated `serialize` function that is meant to be invoked with a `slate 0.50+` state object and will transform the object into a markdown document.
 
@@ -38,11 +47,28 @@ export default ({ onChange }) => {
 };
 ```
 
-### Deserializing from markdown to slate object:
+### Markdown to Slate object:
 
-When deserializing, this package is meant to be used with [remark-parse](https://github.com/remarkjs/remark/tree/master/packages/remark-parse)
+When deserializing from markdown to slate, this package is meant to be used with [remark-parse](https://github.com/remarkjs/remark/tree/master/packages/remark-parse) and [unified](https://github.com/unifiedjs/unified).
 
-Say we have the following file, `example.md`:
+Our JS looks something like this:
+
+```js
+import fs from 'fs';
+import unified from 'unified';
+import markdown from 'remark-parse';
+import slate from 'remark-slate';
+
+unified()
+  .use(markdown)
+  .use(slate)
+  .process(fs.readFileSync('example.md'), (err, file) => {
+    if (err) throw err;
+    console.log({ file });
+  });
+```
+
+And `example.md` looks like this:
 
 ```markdown
 # Heading one
@@ -76,24 +102,9 @@ _italic text_
 1. ordered list item 2
 ```
 
-And our script, `example.js`, looks as follows:
+Results in the following Slate object
 
-```js
-import fs from 'fs';
-import unified from 'unified';
-import markdown from 'remark-parse';
-import slate from 'remark-slate';
-
-unified()
-  .use(markdown)
-  .use(slate)
-  .process(fs.readFileSync('example.md'), (err, file) => {
-    if (err) throw err;
-    console.log({ file });
-  });
-```
-
-Would result in the following:
+<details><summary>Click me reveal!</summary>
 
 ```json
 [
@@ -272,22 +283,13 @@ Would result in the following:
 ]
 ```
 
-```js
-{
-  type: 'heading',
-  depth: 1,
-  children: [{ value: 'Big text' }]
-}
-```
+</details>
 
-…would yield:
+<br>
 
-```json
-{
-  "type": "heading_one",
-  "children": [{ "text": "Big text" }]
-}
-```
+### Miscellaneous
+
+remark-slate makes some assumptions around unordered and ordered lists, the package pairs nicely with [slate-edit-list](https://github.com/productboard/slate-edit-list#readme)
 
 ## Local Development
 
@@ -339,3 +341,7 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [size-badge]: https://img.shields.io/bundlephobia/minzip/remark-slate.svg
 [size]: https://bundlephobia.com/result?p=remark-slate
 [remark]: https://github.com/remarkjs/remark
+
+```
+
+```
