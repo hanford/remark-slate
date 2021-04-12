@@ -126,8 +126,7 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
           children: [{ text: node.value?.replace(/<br>/g, '') || '' }],
         };
       }
-      // TODO: Handle other HTML?
-      return { type: 'paragraph', children: [{ text: '' }] };
+      return { type: 'paragraph', children: [{ text: node.value || '' }] };
 
     case 'emphasis':
       return {

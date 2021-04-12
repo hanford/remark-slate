@@ -28,7 +28,7 @@ exports[`deserialize unknown html 1`] = `
 Object {
   "children": Array [
     Object {
-      "text": "",
+      "text": "<section>",
     },
   ],
   "type": "paragraph",
