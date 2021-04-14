@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deserialize image 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "text": "",
+    },
+  ],
+  "link": "https://www.samsonzhang.com/img/about.jpg",
+  "type": "image",
+}
+`;
