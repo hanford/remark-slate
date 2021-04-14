@@ -185,7 +185,9 @@ export default function serialize(
     case nodeTypes.link:
       return `[${children}](${(chunk as BlockType).link || ''})`;
     case nodeTypes.image:
-      return `![${(chunk as BlockType).caption}](${(chunk as BlockType).link || ''})`;
+      return `![${(chunk as BlockType).caption}](${
+        (chunk as BlockType).link || ''
+      })`;
 
     case nodeTypes.ul_list:
     case nodeTypes.ol_list:

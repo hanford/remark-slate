@@ -5,7 +5,7 @@ it('Serialize a image from slate state to markdown', () => {
     serialize({
       type: defaultNodeTypes.image,
       link: 'https://avatars.githubusercontent.com/u/2148168',
-      caption: 'Jack\'s profile picture',
+      caption: "'Jack's profile picture'",
       children: [],
     })
   ).toMatchSnapshot();

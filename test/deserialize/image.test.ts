@@ -5,7 +5,7 @@ it('deserialize image', () => {
     deserialize({
       type: 'image',
       url: 'https://avatars.githubusercontent.com/u/2148168',
-      alt: 'Jack\'s profile picture',
+      alt: "'Jack's profile picture'",
       children: [{ text: '' }],
     })
   ).toMatchSnapshot();
