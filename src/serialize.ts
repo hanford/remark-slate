@@ -7,6 +7,7 @@ export interface LeafType {
   strikeThrough?: boolean;
   bold?: boolean;
   italic?: boolean;
+  code?: boolean;
   parentType?: string;
 }
 
@@ -152,6 +153,10 @@ export default function serialize(
 
       if (chunk.strikeThrough) {
         children = retainWhitespaceAndFormat(children, '~~');
+      }
+
+      if (chunk.code) {
+        children = retainWhitespaceAndFormat(children, '`');
       }
     }
   }

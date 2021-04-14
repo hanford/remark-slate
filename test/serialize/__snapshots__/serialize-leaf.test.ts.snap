@@ -15,6 +15,11 @@ exports[`Serialize a bold, italic and strikeThrough paragraph from slate state t
 "
 `;
 
+exports[`Serialize a code paragraph from slate state to markdown 1`] = `
+"\`inline code paragraph\`
+"
+`;
+
 exports[`Serialize a strikeThrough paragraph from slate state to markdown 1`] = `
 "~~strikeThrough paragraph~~
 "

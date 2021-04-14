@@ -17,6 +17,7 @@ export interface NodeTypes {
   emphasis_mark: string;
   strong_mark: string;
   delete_mark: string;
+  inline_code_mark: string;
   thematic_break: string;
 }
 
@@ -64,6 +65,7 @@ export const defaultNodeTypes: NodeTypes = {
   emphasis_mark: 'italic',
   strong_mark: 'bold',
   delete_mark: 'strikeThrough',
+  inline_code_mark: 'code',
   thematic_break: 'thematic_break',
 };
 
@@ -144,6 +146,12 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
       return {
         [types.delete_mark]: true,
         ...forceLeafNode(children),
+        ...persistLeafFormats(children),
+      };
+    case 'inlineCode':
+      return {
+        [types.inline_code_mark]: true,
+        text: node.value,
         ...persistLeafFormats(children),
       };
     case 'thematicBreak':
