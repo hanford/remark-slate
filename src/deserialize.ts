@@ -3,6 +3,7 @@ export interface NodeTypes {
   block_quote: string;
   code_block: string;
   link: string;
+  image: string;
   ul_list: string;
   ol_list: string;
   listItem: string;
@@ -27,6 +28,8 @@ type RecursivePartial<T> = {
 export interface OptionType {
   nodeTypes?: RecursivePartial<NodeTypes>;
   linkDestinationKey?: string;
+  imageSourceKey?: string;
+  imageCaptionKey?: string;
 }
 
 export interface MdastNode {
@@ -37,6 +40,7 @@ export interface MdastNode {
   children?: Array<MdastNode>;
   depth?: 1 | 2 | 3 | 4 | 5 | 6;
   url?: string;
+  alt?: string;
   lang?: string;
   // mdast metadata
   position?: any;
@@ -65,6 +69,7 @@ export const defaultNodeTypes: NodeTypes = {
   strong_mark: 'bold',
   delete_mark: 'strikeThrough',
   thematic_break: 'thematic_break',
+  image: 'image',
 };
 
 export default function deserialize(node: MdastNode, opts?: OptionType) {
@@ -78,6 +83,8 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
   };
 
   const linkDestinationKey = opts?.linkDestinationKey ?? 'link';
+  const imageSourceKey = opts?.imageSourceKey ?? 'link';
+  const imageCaptionKey = opts?.imageCaptionKey ?? 'caption';
 
   let children = [{ text: '' }];
 
@@ -109,6 +116,13 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
       return { type: types.paragraph, children };
     case 'link':
       return { type: types.link, [linkDestinationKey]: node.url, children };
+    case 'image':
+      return {
+        type: types.image,
+        children: [{ text: '' }],
+        [imageSourceKey]: node.url,
+        [imageCaptionKey]: node.alt,
+      };
     case 'blockquote':
       return { type: types.block_quote, children };
     case 'code':

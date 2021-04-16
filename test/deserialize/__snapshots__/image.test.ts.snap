@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`deserialize image 1`] = `
+Object {
+  "caption": "'Jack's profile picture'",
+  "children": Array [
+    Object {
+      "text": "",
+    },
+  ],
+  "link": "https://avatars.githubusercontent.com/u/2148168",
+  "type": "image",
+}
+`;

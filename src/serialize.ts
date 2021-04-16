@@ -14,6 +14,7 @@ export interface BlockType {
   type: string;
   parentType?: string;
   link?: string;
+  caption?: string;
   language?: string;
   break?: boolean;
   children: Array<BlockType | LeafType>;
@@ -183,6 +184,10 @@ export default function serialize(
 
     case nodeTypes.link:
       return `[${children}](${(chunk as BlockType).link || ''})`;
+    case nodeTypes.image:
+      return `![${(chunk as BlockType).caption}](${
+        (chunk as BlockType).link || ''
+      })`;
 
     case nodeTypes.ul_list:
     case nodeTypes.ol_list:

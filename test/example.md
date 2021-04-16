@@ -12,6 +12,8 @@ Slate is interesting, hopefully it'll work better than react-rte so we can have 
 - Kiwi
 - Strawberry
 
+![Jack's profile picture](https://avatars.githubusercontent.com/u/2148168)
+
 Check out [my website](https://jackhanford.com)
 
 > Always bet on javascript
