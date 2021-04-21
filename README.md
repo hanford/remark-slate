@@ -8,7 +8,7 @@
 [**remark**][remark] plugin to compile Markdown as a [Slate](https://www.slatejs.org/) 0.50+ compatible object.
 
 - [Slate ➡️ Markdown:](#slate-object-to-markdown)
-- [Markdown ➡️ Slate object:](#markdown-to-slate-object)
+- [Markdown ➡️ Slate:](#markdown-to-slate-object)
 - [Miscellaneous](#miscellaneous)
 - [Local Development](#local-development)
   - [`npm start` or `yarn start`](#npm-start-or-yarn-start)
