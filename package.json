@@ -1,6 +1,6 @@
 {
   "name": "remark-slate",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "remark plugin to compile Markdown to a slate compatible object",
   "license": "MIT",
   "module": "dist/remark-slate.esm.js",
