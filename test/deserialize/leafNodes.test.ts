@@ -146,6 +146,20 @@ it('Deserialize a leaf node with just strikethrough', () => {
   ).toMatchSnapshot();
 });
 
+it('Deserialize a leaf node with inline code directly inline', () => {
+  expect(
+    deserialize({
+      type: 'paragraph',
+      children: [
+        {
+          type: 'inlineCode',
+          value: 'inline code',
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
+
 it('Handles cases where leafs have metadata attached', () => {
   expect(
     deserialize({

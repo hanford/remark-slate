@@ -42,6 +42,20 @@ it('Serialize a strikeThrough paragraph from slate state to markdown', () => {
   ).toMatchSnapshot();
 });
 
+it('Serialize a code paragraph from slate state to markdown', () => {
+  expect(
+    serialize({
+      type: defaultNodeTypes.paragraph,
+      children: [
+        {
+          code: true,
+          text: 'inline code paragraph',
+        },
+      ],
+    })
+  ).toMatchSnapshot();
+});
+
 it('Serialize a bold and italic paragraph from slate state to markdown', () => {
   expect(
     serialize({

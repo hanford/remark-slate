@@ -52,6 +52,18 @@ Object {
 }
 `;
 
+exports[`Deserialize a leaf node with inline code directly inline 1`] = `
+Object {
+  "children": Array [
+    Object {
+      "code": true,
+      "text": "inline code",
+    },
+  ],
+  "type": "paragraph",
+}
+`;
+
 exports[`Deserialize a leaf node with just bold 1`] = `
 Object {
   "children": Array [
