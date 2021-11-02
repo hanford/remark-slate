@@ -123,7 +123,7 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
         type: types.image,
         children: [{ text: '' }],
         [imageSourceKey]: node.url,
-        [imageCaptionKey]: node.alt,
+        [imageCaptionKey]: [{ text: node.alt }],
       };
     case 'blockquote':
       return { type: types.block_quote, children };
