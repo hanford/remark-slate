@@ -31,7 +31,7 @@ const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
   return typeof (node as LeafType).text === 'string';
 };
 
-const VOID_ELEMENTS: Array<keyof NodeTypes> = ['thematic_break'];
+const VOID_ELEMENTS: Array<keyof NodeTypes> = ['thematic_break', 'image'];
 
 const BREAK_TAG = '<br>';
 
