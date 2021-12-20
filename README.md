@@ -341,7 +341,3 @@ THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 [size-badge]: https://img.shields.io/bundlephobia/minzip/remark-slate.svg
 [size]: https://bundlephobia.com/result?p=remark-slate
 [remark]: https://github.com/remarkjs/remark
-
-```
-
-```
