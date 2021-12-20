@@ -8,7 +8,6 @@ it('Use unified to turn markdown into slate state', () => {
     .use(slate)
     .process('[my link](https://github.com)', (err, file) => {
       if (err) throw err;
-      // @ts-expect-error
       expect(file.result).toMatchSnapshot();
     });
 });
