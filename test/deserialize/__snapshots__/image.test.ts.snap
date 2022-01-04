@@ -2,7 +2,11 @@
 
 exports[`deserialize image 1`] = `
 Object {
-  "caption": "'Jack's profile picture'",
+  "caption": Array [
+    Object {
+      "text": "'Jack's profile picture'",
+    },
+  ],
   "children": Array [
     Object {
       "text": "",
