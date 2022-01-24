@@ -96,7 +96,7 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
     node.children.length > 0
   ) {
     // @ts-ignore
-    children = node.children.map((c: MdastNode) =>
+    children = node.children.flatMap((c: MdastNode) =>
       deserialize(
         {
           ...c,
