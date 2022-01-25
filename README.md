@@ -104,7 +104,7 @@ _italic text_
 
 Results in the following Slate object
 
-<details><summary>Click me reveal!</summary>
+<details><summary>Reveal</summary>
 
 ```json
 [

@@ -21,7 +21,8 @@
     "markdown",
     "slate",
     "RTE",
-    "text editor"
+    "text editor",
+    "slate markdown"
   ],
   "repository": "hanford/remark-slate",
   "bugs": "https://github.com/hanford/remark-slate/issues",
