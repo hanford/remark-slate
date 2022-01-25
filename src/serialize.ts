@@ -65,10 +65,10 @@ export default function serialize(
     children = chunk.children
       .map((c: BlockType | LeafType) => {
         const isList = !isLeafNode(c)
-          ? LIST_TYPES.includes(c.type || '')
+          ? (LIST_TYPES as string[]).includes(c.type || '')
           : false;
 
-        const selfIsList = LIST_TYPES.includes(chunk.type || '');
+        const selfIsList = (LIST_TYPES as string[]).includes(chunk.type || '');
 
         // Links can have the following shape
         // In which case we don't want to surround
@@ -109,7 +109,9 @@ export default function serialize(
               !(c as BlockType).break,
 
             // track depth of nested lists so we can add proper spacing
-            listDepth: LIST_TYPES.includes((c as BlockType).type || '')
+            listDepth: (LIST_TYPES as string[]).includes(
+              (c as BlockType).type || ''
+            )
               ? listDepth + 1
               : listDepth,
           }
