@@ -74,7 +74,85 @@ export const defaultNodeTypes: NodeTypes = {
   image: 'image',
 };
 
-export default function deserialize(node: MdastNode, opts?: OptionType) {
+type TextNode = { text?: string | undefined };
+
+export type DeserializedNode =
+  | {
+      type: 'code_block';
+      language: string | undefined;
+      children: Array<TextNode>;
+    }
+  | {
+      type:
+        | 'heading_one'
+        | 'heading_two'
+        | 'heading_three'
+        | 'heading_four'
+        | 'heading_five'
+        | 'heading_six';
+      children: Array<DeserializedNode>;
+    }
+  | {
+      type: 'ol_list' | 'ul_list';
+      children: Array<DeserializedNode>;
+    }
+  | {
+      type: 'list_item';
+      children: Array<DeserializedNode>;
+    }
+  | {
+      type: 'paragraph';
+      break?: true;
+      children: Array<DeserializedNode>;
+    }
+  | {
+      type: 'link';
+      children: Array<DeserializedNode>;
+      [urlKey: string]: string | undefined | Array<DeserializedNode>;
+    }
+  | {
+      type: 'image';
+      children: Array<DeserializedNode>;
+      [sourceOrCaptionKey: string]:
+        | string
+        | undefined
+        | Array<DeserializedNode>;
+    }
+  | {
+      type: 'block_quote';
+      children: Array<DeserializedNode>;
+    }
+  | {
+      type: 'code';
+      children: Array<TextNode>;
+      language: string | undefined;
+    }
+  | {
+      type: 'thematic_break';
+      children: Array<DeserializedNode>;
+    }
+  | {
+      italic: true;
+      children: TextNode;
+    }
+  | {
+      bold: true;
+      children: TextNode;
+    }
+  | {
+      strikeThrough: true;
+      children: TextNode;
+    }
+  | {
+      code: true;
+      text: string | undefined;
+    }
+  | TextNode;
+
+export default function deserialize(
+  node: MdastNode,
+  opts?: OptionType
+): DeserializedNode {
   const types = {
     ...defaultNodeTypes,
     ...opts?.nodeTypes,
@@ -88,15 +166,11 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
   const imageSourceKey = opts?.imageSourceKey ?? 'link';
   const imageCaptionKey = opts?.imageCaptionKey ?? 'caption';
 
-  let children = [{ text: '' }];
+  let children: Array<DeserializedNode> = [{ text: '' }];
 
-  if (
-    node.children &&
-    Array.isArray(node.children) &&
-    node.children.length > 0
-  ) {
-    // @ts-ignore
-    children = node.children.flatMap((c: MdastNode) =>
+  const nodeChildren = node.children;
+  if (nodeChildren && Array.isArray(nodeChildren) && nodeChildren.length > 0) {
+    children = nodeChildren.flatMap((c: MdastNode) =>
       deserialize(
         {
           ...c,
@@ -147,26 +221,26 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
     case 'emphasis':
       return {
         [types.emphasis_mark]: true,
-        ...forceLeafNode(children),
-        ...persistLeafFormats(children),
+        ...forceLeafNode(children as Array<TextNode>),
+        ...persistLeafFormats(children as Array<MdastNode>),
       };
     case 'strong':
       return {
         [types.strong_mark]: true,
-        ...forceLeafNode(children),
-        ...persistLeafFormats(children),
+        ...forceLeafNode(children as Array<TextNode>),
+        ...persistLeafFormats(children as Array<MdastNode>),
       };
     case 'delete':
       return {
         [types.delete_mark]: true,
-        ...forceLeafNode(children),
-        ...persistLeafFormats(children),
+        ...forceLeafNode(children as Array<TextNode>),
+        ...persistLeafFormats(children as Array<MdastNode>),
       };
     case 'inlineCode':
       return {
         [types.inline_code_mark]: true,
         text: node.value,
-        ...persistLeafFormats(children),
+        ...persistLeafFormats(children as Array<MdastNode>),
       };
     case 'thematicBreak':
       return {
@@ -180,19 +254,20 @@ export default function deserialize(node: MdastNode, opts?: OptionType) {
   }
 }
 
-const forceLeafNode = (children: Array<{ text?: string }>) => ({
+const forceLeafNode = (children: Array<TextNode>) => ({
   text: children.map((k) => k?.text).join(''),
 });
 
 // This function is will take any unknown keys, and bring them up a level
 // allowing leaf nodes to have many different formats at once
 // for example, bold and italic on the same node
-function persistLeafFormats(children: Array<MdastNode>) {
+function persistLeafFormats(
+  children: Array<MdastNode>
+): Omit<MdastNode, 'children' | 'type' | 'text'> {
   return children.reduce((acc, node) => {
-    Object.keys(node).forEach(function (key) {
+    (Object.keys(node) as Array<keyof MdastNode>).forEach(function (key) {
       if (key === 'children' || key === 'type' || key === 'text') return;
 
-      // @ts-ignore
       acc[key] = node[key];
     });
 
