@@ -1,3 +1,26 @@
+export interface InputNodeTypes {
+  paragraph: string;
+  block_quote: string;
+  code_block: string;
+  link: string;
+  ul_list: string;
+  ol_list: string;
+  listItem: string;
+  heading: {
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
+  };
+  emphasis_mark: string;
+  strong_mark: string;
+  delete_mark: string;
+  inline_code_mark: string;
+  thematic_break: string;
+  image: string;
+}
 export interface NodeTypes {
   paragraph: 'paragraph';
   block_quote: 'block_quote';
@@ -26,8 +49,8 @@ type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
 
-export interface OptionType {
-  nodeTypes?: RecursivePartial<NodeTypes>;
+export interface OptionType<T extends InputNodeTypes> {
+  nodeTypes?: RecursivePartial<T>;
   linkDestinationKey?: string;
   imageSourceKey?: string;
   imageCaptionKey?: string;
@@ -76,83 +99,109 @@ export const defaultNodeTypes: NodeTypes = {
 
 type TextNode = { text?: string | undefined };
 
-export type DeserializedNode =
-  | {
-      type: 'code_block';
-      language: string | undefined;
-      children: Array<TextNode>;
-    }
-  | {
-      type:
-        | 'heading_one'
-        | 'heading_two'
-        | 'heading_three'
-        | 'heading_four'
-        | 'heading_five'
-        | 'heading_six';
-      children: Array<DeserializedNode>;
-    }
-  | {
-      type: 'ol_list' | 'ul_list';
-      children: Array<DeserializedNode>;
-    }
-  | {
-      type: 'list_item';
-      children: Array<DeserializedNode>;
-    }
-  | {
-      type: 'paragraph';
-      break?: true;
-      children: Array<DeserializedNode>;
-    }
-  | {
-      type: 'link';
-      children: Array<DeserializedNode>;
-      [urlKey: string]: string | undefined | Array<DeserializedNode>;
-    }
-  | {
-      type: 'image';
-      children: Array<DeserializedNode>;
-      [sourceOrCaptionKey: string]:
-        | string
-        | undefined
-        | Array<DeserializedNode>;
-    }
-  | {
-      type: 'block_quote';
-      children: Array<DeserializedNode>;
-    }
-  | {
-      type: 'code';
-      children: Array<TextNode>;
-      language: string | undefined;
-    }
-  | {
-      type: 'thematic_break';
-      children: Array<DeserializedNode>;
-    }
-  | {
-      italic: true;
-      children: TextNode;
-    }
-  | {
-      bold: true;
-      children: TextNode;
-    }
-  | {
-      strikeThrough: true;
-      children: TextNode;
-    }
-  | {
-      code: true;
-      text: string | undefined;
-    }
+type CodeBlockNode<T extends InputNodeTypes> = {
+  type: T['code_block'];
+  language: string | undefined;
+  children: Array<TextNode>;
+};
+
+type HeadingNode<T extends InputNodeTypes> = {
+  type:
+    | T['heading'][1]
+    | T['heading'][2]
+    | T['heading'][3]
+    | T['heading'][4]
+    | T['heading'][5]
+    | T['heading'][6];
+  children: Array<DeserializedNode<T>>;
+};
+
+type ListNode<T extends InputNodeTypes> = {
+  type: T['ol_list'] | T['ul_list'];
+  children: Array<DeserializedNode<T>>;
+};
+
+type ListItemNode<T extends InputNodeTypes> = {
+  type: T['listItem'];
+  children: Array<DeserializedNode<T>>;
+};
+
+type ParagraphNode<T extends InputNodeTypes> = {
+  type: T['paragraph'];
+  break?: true;
+  children: Array<DeserializedNode<T>>;
+};
+
+type LinkNode<T extends InputNodeTypes> = {
+  type: T['link'];
+  children: Array<DeserializedNode<T>>;
+  [urlKey: string]: string | undefined | Array<DeserializedNode<T>>;
+};
+
+type ImageNode<T extends InputNodeTypes> = {
+  type: T['image'];
+  children: Array<DeserializedNode<T>>;
+  [sourceOrCaptionKey: string]: string | undefined | Array<DeserializedNode<T>>;
+};
+
+type BlockQuoteNode<T extends InputNodeTypes> = {
+  type: T['block_quote'];
+  children: Array<DeserializedNode<T>>;
+};
+
+type InlineCodeMarkNode<T extends InputNodeTypes> = {
+  type: T['inline_code_mark'];
+  children: Array<TextNode>;
+  language: string | undefined;
+};
+
+type ThematicBreakNode<T extends InputNodeTypes> = {
+  type: T['thematic_break'];
+  children: Array<DeserializedNode<T>>;
+};
+
+type ItalicNode<T extends InputNodeTypes> = {
+  [K in T['emphasis_mark']]: true;
+} & {
+  children: TextNode;
+};
+
+type BoldNode = {
+  bold: true;
+  children: TextNode;
+};
+
+type StrikeThoughNode = {
+  strikeThrough: true;
+  children: TextNode;
+};
+
+type InlineCodeNode = {
+  code: true;
+  text: string | undefined;
+};
+
+export type DeserializedNode<T extends InputNodeTypes> =
+  | CodeBlockNode<T>
+  | HeadingNode<T>
+  | ListNode<T>
+  | ListItemNode<T>
+  | ParagraphNode<T>
+  | LinkNode<T>
+  | ImageNode<T>
+  | BlockQuoteNode<T>
+  | InlineCodeMarkNode<T>
+  | ThematicBreakNode<T>
+  | ItalicNode<T>
+  | BoldNode
+  | StrikeThoughNode
+  | InlineCodeNode
   | TextNode;
 
-export default function deserialize(
+export default function deserialize<T extends InputNodeTypes = NodeTypes>(
   node: MdastNode,
-  opts?: OptionType
-): DeserializedNode {
+  opts?: OptionType<T>
+) {
   const types = {
     ...defaultNodeTypes,
     ...opts?.nodeTypes,
@@ -166,7 +215,7 @@ export default function deserialize(
   const imageSourceKey = opts?.imageSourceKey ?? 'link';
   const imageCaptionKey = opts?.imageCaptionKey ?? 'caption';
 
-  let children: Array<DeserializedNode> = [{ text: '' }];
+  let children: Array<DeserializedNode<T>> = [{ text: '' }];
 
   const nodeChildren = node.children;
   if (nodeChildren && Array.isArray(nodeChildren) && nodeChildren.length > 0) {
@@ -183,30 +232,40 @@ export default function deserialize(
 
   switch (node.type) {
     case 'heading':
-      return { type: types.heading[node.depth || 1], children };
+      return {
+        type: types.heading[node.depth || 1],
+        children,
+      } as HeadingNode<T>;
     case 'list':
-      return { type: node.ordered ? types.ol_list : types.ul_list, children };
+      return {
+        type: node.ordered ? types.ol_list : types.ul_list,
+        children,
+      } as ListNode<T>;
     case 'listItem':
-      return { type: types.listItem, children };
+      return { type: types.listItem, children } as ListItemNode<T>;
     case 'paragraph':
-      return { type: types.paragraph, children };
+      return { type: types.paragraph, children } as ParagraphNode<T>;
     case 'link':
-      return { type: types.link, [linkDestinationKey]: node.url, children };
+      return {
+        type: types.link,
+        [linkDestinationKey]: node.url,
+        children,
+      } as LinkNode<T>;
     case 'image':
       return {
         type: types.image,
         children: [{ text: '' }],
         [imageSourceKey]: node.url,
         [imageCaptionKey]: node.alt,
-      };
+      } as ImageNode<T>;
     case 'blockquote':
-      return { type: types.block_quote, children };
+      return { type: types.block_quote, children } as BlockQuoteNode<T>;
     case 'code':
       return {
         type: types.code_block,
         language: node.lang,
         children: [{ text: node.value }],
-      };
+      } as CodeBlockNode<T>;
 
     case 'html':
       if (node.value?.includes('<br>')) {
@@ -214,31 +273,31 @@ export default function deserialize(
           break: true,
           type: types.paragraph,
           children: [{ text: node.value?.replace(/<br>/g, '') || '' }],
-        };
+        } as ParagraphNode<T>;
       }
       return { type: 'paragraph', children: [{ text: node.value || '' }] };
 
     case 'emphasis':
       return {
-        [types.emphasis_mark]: true,
+        [types.emphasis_mark as string]: true,
         ...forceLeafNode(children as Array<TextNode>),
         ...persistLeafFormats(children as Array<MdastNode>),
-      };
+      } as unknown as ItalicNode<T>;
     case 'strong':
       return {
-        [types.strong_mark]: true,
+        [types.strong_mark as string]: true,
         ...forceLeafNode(children as Array<TextNode>),
         ...persistLeafFormats(children as Array<MdastNode>),
       };
     case 'delete':
       return {
-        [types.delete_mark]: true,
+        [types.delete_mark as string]: true,
         ...forceLeafNode(children as Array<TextNode>),
         ...persistLeafFormats(children as Array<MdastNode>),
       };
     case 'inlineCode':
       return {
-        [types.inline_code_mark]: true,
+        [types.inline_code_mark as string]: true,
         text: node.value,
         ...persistLeafFormats(children as Array<MdastNode>),
       };
@@ -246,7 +305,7 @@ export default function deserialize(
       return {
         type: types.thematic_break,
         children: [{ text: '' }],
-      };
+      } as ThematicBreakNode<T>;
 
     case 'text':
     default:
