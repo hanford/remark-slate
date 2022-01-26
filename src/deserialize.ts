@@ -56,8 +56,25 @@ export interface OptionType<T extends InputNodeTypes> {
   imageCaptionKey?: string;
 }
 
+export type MdastNodeType =
+  | 'paragraph'
+  | 'heading'
+  | 'list'
+  | 'listItem'
+  | 'link'
+  | 'image'
+  | 'blockquote'
+  | 'code'
+  | 'html'
+  | 'emphasis'
+  | 'strong'
+  | 'delete'
+  | 'inlineCode'
+  | 'thematicBreak'
+  | 'text';
+
 export interface MdastNode {
-  type?: string;
+  type?: MdastNodeType;
   ordered?: boolean;
   value?: string;
   text?: string;
@@ -198,7 +215,7 @@ export type DeserializedNode<T extends InputNodeTypes> =
   | InlineCodeNode
   | TextNode;
 
-export default function deserialize<T extends InputNodeTypes = NodeTypes>(
+export default function deserialize<T extends InputNodeTypes>(
   node: MdastNode,
   opts?: OptionType<T>
 ) {
