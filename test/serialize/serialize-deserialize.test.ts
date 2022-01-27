@@ -1,7 +1,7 @@
 import unified from 'unified';
 import parse from 'remark-parse';
 import plugin, { serialize } from '../../src';
-import { LeafType, BlockType } from '../../src/serialize';
+import { LeafType, BlockType } from '../../src/ast-types';
 
 const mdown = `a
 <br>

@@ -1,25 +1,5 @@
+import { BlockType, defaultNodeTypes, LeafType, NodeTypes } from './ast-types';
 import escapeHtml from 'escape-html';
-
-import { defaultNodeTypes, NodeTypes } from './deserialize';
-
-export interface LeafType {
-  text: string;
-  strikeThrough?: boolean;
-  bold?: boolean;
-  italic?: boolean;
-  code?: boolean;
-  parentType?: string;
-}
-
-export interface BlockType {
-  type: string;
-  parentType?: string;
-  link?: string;
-  caption?: string;
-  language?: string;
-  break?: boolean;
-  children: Array<BlockType | LeafType>;
-}
 
 interface Options {
   nodeTypes: NodeTypes;
