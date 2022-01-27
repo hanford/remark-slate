@@ -1,4 +1,5 @@
-import transform, { OptionType, MdastNode } from './deserialize';
+import { MdastNode, OptionType } from './ast-types';
+import transform from './deserialize';
 
 export default function plugin(opts?: OptionType) {
   const compiler = (node: { children: Array<MdastNode> }) => {
