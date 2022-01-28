@@ -1,7 +1,9 @@
-import deserialize, { defaultNodeTypes } from './deserialize';
+import deserialize from './deserialize';
 import serialize from './serialize';
 import plugin from './plugin';
 
-export { deserialize, serialize, defaultNodeTypes };
+export * from './ast-types';
+
+export { deserialize, serialize };
 
 export default plugin;

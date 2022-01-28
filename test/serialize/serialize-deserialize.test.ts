@@ -1,7 +1,7 @@
 import unified from 'unified';
 import parse from 'remark-parse';
 import plugin, { serialize } from '../../src';
-import { LeafType, BlockType } from '../../src/serialize';
+import { LeafType, BlockType } from '../../src/ast-types';
 
 const mdown = `a
 <br>
@@ -17,11 +17,10 @@ test('Deserialize and serialize mix of break tags and new lines', (done) => {
     .use(parse)
     .use(plugin)
     .process(mdown, (_, file) => {
-      //@ts-ignore ts doesn't know about file.result
-      const res = file.result;
+      const res = file.result as (LeafType | BlockType)[];
       expect(res).toMatchSnapshot();
 
-      const fin = res.map((v: LeafType | BlockType) => serialize(v)).join('');
+      const fin = res.map((v) => serialize(v)).join('');
 
       expect(fin).toEqual(mdown);
       done();
@@ -36,11 +35,10 @@ test('Deserialize heading with new line', (done) => {
     .use(parse)
     .use(plugin)
     .process(headingWithNewLine, (_, file) => {
-      //@ts-ignore ts doesn't know about file.result
-      const res = file.result;
+      const res = file.result as (LeafType | BlockType)[];
       expect(res).toMatchSnapshot();
 
-      const fin = res.map((v: LeafType | BlockType) => serialize(v)).join('');
+      const fin = res.map((v) => serialize(v)).join('');
 
       expect(fin).toEqual(headingWithNewLine);
       done();
