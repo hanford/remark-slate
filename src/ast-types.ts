@@ -115,6 +115,7 @@ export interface OptionType<T extends InputNodeTypes = InputNodeTypes> {
   linkDestinationKey?: string;
   imageSourceKey?: string;
   imageCaptionKey?: string;
+  lineBreakSymbol?: string;
 }
 
 export interface MdastNode {
