@@ -28,13 +28,14 @@ import { serialize } from 'remark-slate';
 export default ({ onChange }) => {
   const [value, setValue] = useState(initialValue);
 
-  React.useEffect(() => {
+  const handleChange = useCallback((nextValue) => {
+		setValue(nextValue);
     // serialize slate state to a markdown string
-    onChange(value.map((v) => serialize(v)).join(''));
-  }, [onChange, value]);
+		onChange(value.map((v) => serialize(v)).join(''));
+	}, [onChange]);
 
   return (
-    <Slate editor={editor} value={value} onChange={(value) => setValue(value)}>
+    <Slate editor={editor} value={value} onChange={handleChange}>
       <Editable
         renderElement={renderElement}
         renderLeaf={renderLeaf}
