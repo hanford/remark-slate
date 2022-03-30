@@ -182,6 +182,9 @@ export default function serialize(
 
     case nodeTypes.listItem:
       const isOL = chunk && chunk.parentType === nodeTypes.ol_list;
+      const treatAsLeaf =
+        (chunk as BlockType).children.length === 1 &&
+        isLeafNode((chunk as BlockType).children[0]);
 
       let spacer = '';
       for (let k = 0; listDepth > k; k++) {
@@ -192,7 +195,9 @@ export default function serialize(
           spacer += '  ';
         }
       }
-      return `${spacer}${isOL ? '1.' : '-'} ${children}`;
+      return `${spacer}${isOL ? '1.' : '-'} ${children}${
+        treatAsLeaf ? '\n' : ''
+      }`;
 
     case nodeTypes.paragraph:
       return `${children}\n`;
