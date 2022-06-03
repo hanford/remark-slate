@@ -43,6 +43,7 @@ export default function deserialize<T extends InputNodeTypes>(
         {
           ...c,
           ordered: node.ordered || false,
+          parentType: node.type,
         },
         opts
       )
@@ -63,7 +64,13 @@ export default function deserialize<T extends InputNodeTypes>(
     case 'listItem':
       return { type: types.listItem, children } as ListItemNode<T>;
     case 'paragraph':
-      return { type: types.paragraph, children } as ParagraphNode<T>;
+      return {
+        type:
+          node.parentType === 'listItem'
+            ? types.listItemContent
+            : types.paragraph,
+        children,
+      } as ParagraphNode<T>;
     case 'link':
       return {
         type: types.link,
