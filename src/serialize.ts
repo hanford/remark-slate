@@ -5,6 +5,7 @@ interface Options {
   nodeTypes: NodeTypes;
   listDepth?: number;
   ignoreParagraphNewline?: boolean;
+  linkDestinationKey?: string;
 }
 
 const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
@@ -23,6 +24,7 @@ export default function serialize(
     nodeTypes: userNodeTypes = defaultNodeTypes,
     ignoreParagraphNewline = false,
     listDepth = 0,
+    linkDestinationKey = 'link',
   } = opts;
 
   let text = (chunk as LeafType).text || '';
@@ -73,6 +75,7 @@ export default function serialize(
           { ...c, parentType: type },
           {
             nodeTypes,
+            linkDestinationKey,
             // WOAH.
             // what we're doing here is pretty tricky, it relates to the block below where
             // we check for ignoreParagraphNewline and set type to paragraph.
@@ -170,7 +173,7 @@ export default function serialize(
       }\n${children}\n\`\`\`\n`;
 
     case nodeTypes.link:
-      return `[${children}](${(chunk as BlockType).link || ''})`;
+      return `[${children}](${(chunk as any)[linkDestinationKey] || ''})`;
     case nodeTypes.image:
       return `![${(chunk as BlockType).caption}](${
         (chunk as BlockType).link || ''
