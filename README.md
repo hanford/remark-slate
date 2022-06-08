@@ -29,10 +29,10 @@ export default ({ onChange }) => {
   const [value, setValue] = useState(initialValue);
 
   const handleChange = useCallback((nextValue) => {
-		setValue(nextValue);
+    setValue(nextValue);
     // serialize slate state to a markdown string
-		onChange(value.map((v) => serialize(v)).join(''));
-	}, [onChange]);
+    onChange(value.map((v) => serialize(v)).join(''));
+  }, [onChange]);
 
   return (
     <Slate editor={editor} value={value} onChange={handleChange}>
