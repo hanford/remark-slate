@@ -6,6 +6,7 @@ export interface NodeTypes {
   ul_list: 'ul_list';
   ol_list: 'ol_list';
   listItem: 'list_item';
+  listItemContent: 'paragraph';
   heading: {
     1: 'heading_one';
     2: 'heading_two';
@@ -47,6 +48,7 @@ export const defaultNodeTypes: NodeTypes = {
   ul_list: 'ul_list',
   ol_list: 'ol_list',
   listItem: 'list_item',
+  listItemContent: 'paragraph',
   heading: {
     1: 'heading_one',
     2: 'heading_two',
@@ -132,6 +134,7 @@ export interface MdastNode {
   spread?: any;
   checked?: any;
   indent?: any;
+  parentType?: MdastNodeType;
 }
 
 export type TextNode = { text?: string | undefined };

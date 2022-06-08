@@ -1,5 +1,5 @@
-import { BlockType, defaultNodeTypes, LeafType, NodeTypes } from './ast-types';
 import escapeHtml from 'escape-html';
+import { BlockType, defaultNodeTypes, LeafType, NodeTypes } from './ast-types';
 
 interface Options {
   nodeTypes: NodeTypes;
@@ -198,7 +198,7 @@ export default function serialize(
       return `${spacer}${isOL ? '1.' : '-'} ${children}${
         treatAsLeaf ? '\n' : ''
       }`;
-
+    case nodeTypes.listItemContent:
     case nodeTypes.paragraph:
       return `${children}\n`;
 
