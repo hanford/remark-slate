@@ -16,7 +16,7 @@ export interface NodeTypes {
   };
   emphasis_mark: 'italic';
   strong_mark: 'bold';
-  delete_mark: 'strikeThrough';
+  delete_mark: 'strikethrough';
   inline_code_mark: 'code';
   thematic_break: 'thematic_break';
   image: 'image';
@@ -57,7 +57,7 @@ export const defaultNodeTypes: NodeTypes = {
   },
   emphasis_mark: 'italic',
   strong_mark: 'bold',
-  delete_mark: 'strikeThrough',
+  delete_mark: 'strikethrough',
   inline_code_mark: 'code',
   thematic_break: 'thematic_break',
   image: 'image',
@@ -65,7 +65,7 @@ export const defaultNodeTypes: NodeTypes = {
 
 export interface LeafType {
   text: string;
-  strikeThrough?: boolean;
+  strikethrough?: boolean;
   bold?: boolean;
   italic?: boolean;
   code?: boolean;
@@ -209,7 +209,7 @@ export type BoldNode = {
 };
 
 export type StrikeThoughNode = {
-  strikeThrough: true;
+  strikethrough: true;
   children: TextNode;
 };
 

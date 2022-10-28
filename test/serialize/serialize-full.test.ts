@@ -53,7 +53,7 @@ const slateTree = [
     children: [
       {
         text: 'Strike through',
-        strikeThrough: true,
+        strikethrough: true,
       },
     ],
   },
@@ -62,7 +62,7 @@ const slateTree = [
     children: [
       {
         text: '',
-        strikeThrough: true,
+        strikethrough: true,
       },
     ],
   },
@@ -71,7 +71,7 @@ const slateTree = [
     children: [
       {
         text: '',
-        strikeThrough: true,
+        strikethrough: true,
       },
       {
         link: 'https://google.com',
@@ -112,7 +112,7 @@ const slateTree = [
     children: [
       {
         text: '',
-        strikeThrough: true,
+        strikethrough: true,
       },
     ],
   },
@@ -136,7 +136,7 @@ const slateTree = [
     children: [
       {
         text: '',
-        strikeThrough: true,
+        strikethrough: true,
       },
     ],
   },

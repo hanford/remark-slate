@@ -188,7 +188,7 @@ Results in the following Slate object
     "children": [
       {
         "text": "strike through text",
-        "strikeThrough": true
+        "strikethrough": true
       }
     ]
   },

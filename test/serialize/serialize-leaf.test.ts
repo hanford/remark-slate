@@ -28,14 +28,14 @@ it('Serialize an italic paragraph from slate state to markdown', () => {
   ).toMatchSnapshot();
 });
 
-it('Serialize a strikeThrough paragraph from slate state to markdown', () => {
+it('Serialize a strikethrough paragraph from slate state to markdown', () => {
   expect(
     serialize({
       type: defaultNodeTypes.paragraph,
       children: [
         {
-          strikeThrough: true,
-          text: 'strikeThrough paragraph',
+          strikethrough: true,
+          text: 'strikethrough paragraph',
         },
       ],
     })
@@ -71,7 +71,7 @@ it('Serialize a bold and italic paragraph from slate state to markdown', () => {
   ).toMatchSnapshot();
 });
 
-it('Serialize a bold, italic and strikeThrough paragraph from slate state to markdown', () => {
+it('Serialize a bold, italic and strikethrough paragraph from slate state to markdown', () => {
   expect(
     serialize({
       type: defaultNodeTypes.paragraph,
@@ -79,7 +79,7 @@ it('Serialize a bold, italic and strikeThrough paragraph from slate state to mar
         {
           bold: true,
           italic: true,
-          strikeThrough: true,
+          strikethrough: true,
           text: 'bold/italic/strikethrough paragraph',
         },
       ],
@@ -121,8 +121,8 @@ it('Whitespace is retained when applying strikethrough formatting', () => {
       type: defaultNodeTypes.paragraph,
       children: [
         {
-          strikeThrough: true,
-          text: '  strikeThrough  ',
+          strikethrough: true,
+          text: '  strikethrough  ',
         },
       ],
     })
@@ -135,10 +135,10 @@ it('Whitespace is retained when applying bold, italic and strikethrough formatti
       type: defaultNodeTypes.paragraph,
       children: [
         {
-          strikeThrough: true,
+          strikethrough: true,
           bold: true,
           italic: true,
-          text: '  bold, italic, strikeThrough  ',
+          text: '  bold, italic, strikethrough  ',
         },
       ],
     })
