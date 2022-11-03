@@ -1,25 +1,25 @@
 export interface NodeTypes {
-  paragraph: 'paragraph';
-  block_quote: 'block_quote';
-  code_block: 'code_block';
-  link: 'link';
-  ul_list: 'ul_list';
-  ol_list: 'ol_list';
-  listItem: 'list_item';
+  paragraph: string;
+  block_quote: string;
+  code_block: string;
+  link: string;
+  ul_list: string;
+  ol_list: string;
+  listItem: string;
   heading: {
-    1: 'heading_one';
-    2: 'heading_two';
-    3: 'heading_three';
-    4: 'heading_four';
-    5: 'heading_five';
-    6: 'heading_six';
+    1: string;
+    2: string;
+    3: string;
+    4: string;
+    5: string;
+    6: string;
   };
-  emphasis_mark: 'italic';
-  strong_mark: 'bold';
-  delete_mark: 'strikeThrough';
-  inline_code_mark: 'code';
-  thematic_break: 'thematic_break';
-  image: 'image';
+  emphasis_mark: string;
+  strong_mark: string;
+  delete_mark: string;
+  inline_code_mark: string;
+  thematic_break: string;
+  image: string;
 }
 
 export type MdastNodeType =
