@@ -2,9 +2,11 @@ import { BlockType, defaultNodeTypes, LeafType, NodeTypes } from './ast-types';
 import escapeHtml from 'escape-html';
 
 interface Options {
-  nodeTypes: NodeTypes;
+  nodeTypes?: NodeTypes;
   listDepth?: number;
   ignoreParagraphNewline?: boolean;
+  // lineBreakSymbol is used as an attempt to persist whitespace across serialize and deserialize
+  lineBreakSymbol?: string;
 }
 
 const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
@@ -13,16 +15,15 @@ const isLeafNode = (node: BlockType | LeafType): node is LeafType => {
 
 const VOID_ELEMENTS: Array<keyof NodeTypes> = ['thematic_break', 'image'];
 
-const BREAK_TAG = '<br>';
-
 export default function serialize(
   chunk: BlockType | LeafType,
-  opts: Options = { nodeTypes: defaultNodeTypes }
+  opts: Options = {}
 ) {
   const {
     nodeTypes: userNodeTypes = defaultNodeTypes,
     ignoreParagraphNewline = false,
     listDepth = 0,
+    lineBreakSymbol = '<br>',
   } = opts;
 
   let text = (chunk as LeafType).text || '';
@@ -73,6 +74,7 @@ export default function serialize(
           { ...c, parentType: type },
           {
             nodeTypes,
+            lineBreakSymbol,
             // WOAH.
             // what we're doing here is pretty tricky, it relates to the block below where
             // we check for ignoreParagraphNewline and set type to paragraph.
@@ -107,7 +109,7 @@ export default function serialize(
     chunk.parentType === nodeTypes.paragraph
   ) {
     type = nodeTypes.paragraph;
-    children = BREAK_TAG;
+    children = lineBreakSymbol;
   }
 
   if (children === '' && !VOID_ELEMENTS.find((k) => nodeTypes[k] === type))
@@ -120,7 +122,7 @@ export default function serialize(
   // we try applying formatting like to a node like this:
   // "Text foo bar **baz**" resulting in "**Text foo bar **baz****"
   // which is invalid markup and can mess everything up
-  if (children !== BREAK_TAG && isLeafNode(chunk)) {
+  if (children !== lineBreakSymbol && isLeafNode(chunk)) {
     if (chunk.strikeThrough && chunk.bold && chunk.italic) {
       children = retainWhitespaceAndFormat(children, '~~***');
     } else if (chunk.bold && chunk.italic) {

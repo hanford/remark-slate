@@ -33,6 +33,7 @@ export default function deserialize<T extends InputNodeTypes>(
   const linkDestinationKey = opts?.linkDestinationKey ?? 'link';
   const imageSourceKey = opts?.imageSourceKey ?? 'link';
   const imageCaptionKey = opts?.imageCaptionKey ?? 'caption';
+  const lineBreakSymbol = opts?.lineBreakSymbol ?? '<br>';
 
   let children: Array<DeserializedNode<T>> = [{ text: '' }];
 
@@ -87,11 +88,13 @@ export default function deserialize<T extends InputNodeTypes>(
       } as CodeBlockNode<T>;
 
     case 'html':
-      if (node.value?.includes('<br>')) {
+      if (node.value?.includes(lineBreakSymbol)) {
+        const regexp = new RegExp(lineBreakSymbol, 'g');
+
         return {
           break: true,
           type: types.paragraph,
-          children: [{ text: node.value?.replace(/<br>/g, '') || '' }],
+          children: [{ text: node.value?.replace(regexp, '') || '' }],
         } as ParagraphNode<T>;
       }
       return { type: 'paragraph', children: [{ text: node.value || '' }] };
