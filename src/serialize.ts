@@ -187,7 +187,10 @@ export default function serialize(
         isLeafNode((chunk as BlockType).children[0]);
 
       let spacer = '';
+      let index = 0;
       for (let k = 0; listDepth > k; k++) {
+        index = k;
+  
         if (isOL) {
           // https://github.com/remarkjs/remark-react/issues/65
           spacer += '   ';
@@ -195,7 +198,7 @@ export default function serialize(
           spacer += '  ';
         }
       }
-      return `${spacer}${isOL ? '1.' : '-'} ${children}${
+      return `${spacer}${isOL ? k + '.' : '-'} ${children}${
         treatAsLeaf ? '\n' : ''
       }`;
 
